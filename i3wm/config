@@ -202,5 +202,6 @@ bindsym $sup+f exec firefox
 bindsym $sup+e exec nautilus # file explorer
 
 # startup
+exec i3-sensible-terminal
 # Wallpaper
 exec_always $script_path/setWallpaper.sh
