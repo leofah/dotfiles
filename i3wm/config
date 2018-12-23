@@ -182,26 +182,32 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-# needs to install xbacklight
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
-# Touchpad controls
-# needs to install synclient before in the script
-# bindsym XF86TouchpadToggle $script_path/toggletouchpad.sh # toggle touchpad
 
-# Media player controls
-# needs to install playerctl
-bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+# Media player controls with mode
+set $mode_player Control Music [P] Play Pause [M,] Next [N,] Previous 
+mode  "$mode_player" {
+	bindsym p exec playerctl play-pause
+	bindsym m exec playerctl next
+	bindsym Right exec playerctl next
+	bindsym n exec playerctl previous
+	bindsym Left exec playerctl previous
+
+        # back to normal: Enter or Escape
+	bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_player"  
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
 bindsym $sup+e exec nautilus # file explorer
 
 # startup
+# # # # # # # # # #
+
 exec i3-sensible-terminal
 # Wallpaper
 exec_always $script_path/setWallpaper.sh
