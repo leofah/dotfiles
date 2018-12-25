@@ -107,7 +107,7 @@ set $workspace5 5
 set $workspace6 6
 set $workspace7 7
 set $workspace8 8
-set $workspace9 9
+set $workspace9 "9 "
 set $workspace10 "10 "
 
 # switch to workspace
@@ -133,6 +133,11 @@ bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# windows on specific workspaces
+for_window [class="Spotify"] move to workspace $workspace10
+assign [class="Firefox"] $workspace2
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -170,7 +175,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+	position top
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 }
 
 # path to the scripts
@@ -187,7 +193,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 
 
 # Media player controls with mode
-set $mode_player Control Music [P] Play Pause [M,] Next [N,] Previous 
+set $mode_player Control Music | [P] Play Pause | [M,] Next | [N,] Previous
 mode  "$mode_player" {
 	bindsym p exec playerctl play-pause
 	bindsym m exec playerctl next
@@ -199,15 +205,20 @@ mode  "$mode_player" {
 	bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_player"  
+bindsym $mod+p mode "$mode_player"
+
+# lock the screen with pixel effect
+bindsym $mod+Shift+x exec $script_path/lock.sh
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
 bindsym $sup+e exec nautilus # file explorer
+bindsym $sup+s exec spotify
 
 # startup
 # # # # # # # # # #
 
 exec i3-sensible-terminal
+exec nm-applet # start networkmanager applet
 # Wallpaper
 exec_always $script_path/setWallpaper.sh
