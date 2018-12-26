@@ -77,3 +77,4 @@ my $output = join(" - ", @metadata);
 $output = join('',split(/\n/,$output));
  
 print($output."\n") if @metadata;
+print($artist);
