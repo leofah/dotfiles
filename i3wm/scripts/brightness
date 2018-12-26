@@ -1,0 +1,37 @@
+#!/bin/bash
+
+cur=$(xbacklight) 
+cur=${cur%.*}
+if [ $cur -lt 2 ]
+then
+	val=0
+elif [ $cur -lt 5 ] 
+then
+	val=1
+elif [ $cur -lt 20 ]
+then
+	val=5
+elif [ $cur -lt 60 ]
+then
+	val=10
+else
+	val=20
+fi
+
+case "$1" in
+    inc)
+	if [ $val -lt 1 ]
+	then
+		val=1
+	fi
+	xbacklight -inc $val
+        ;;
+    dec)
+	xbacklight -dec $val
+        ;;
+    *)
+        echo "Usage: $0 {inc|dec}"
+        exit 2
+esac
+
+exit 0
