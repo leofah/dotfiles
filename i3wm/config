@@ -208,7 +208,7 @@ bar {
 }
 
 # path to the scripts
-set $script_path /home/leo/scripts
+set $script_path /home/leo/scripts/i3
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -235,8 +235,23 @@ mode  "$mode_player" {
 }
 bindsym $mod+p mode "$mode_player"
 
+set $mode_system System [l] lock, [e] logout, [s] suspend, [h] hibernate, [r] reboot, [Shift+s] shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id $script_path/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id $script_path/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id $script_path/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $script_path/i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+i mode "$mode_system"
+
 # lock the screen with pixel effect
-bindsym $mod+Shift+x exec $script_path/lock.sh
+bindsym $mod+Shift+x exec $script_path/i3exit lock
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
@@ -247,6 +262,14 @@ bindsym $sup+s exec spotify
 # # # # # # # # # #
 
 exec i3-sensible-terminal
-exec nm-applet # start networkmanager applet
+# start networkmanager applet and power management to alert little power
+exec xfce4-power-manager
+exec nm-applet
+# enable lock after suspend (or closing lid)
+exec xss-lock $script_path/i3exit lock
+# lock after 5 mins suspend after 10 mins
+exec xautolock -time 5 -locker '$script_path/i3exit lock' -notifier 'xset dpms force off'
+exec xautolock -time 7 -locker $script_path/i3exit suspend
+
 # Wallpaper
-exec_always $script_path/setWallpaper.sh
+exec_always $script_path/setWallpaper
