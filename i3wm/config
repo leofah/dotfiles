@@ -106,6 +106,11 @@ set $workspace8 8
 set $workspace9 "9 "
 set $workspace10 "10 "
 
+# windows on specific workspaces
+for_window [class="Spotify"] move to workspace $workspace10
+assign [class="Firefox"] $workspace2
+assign [class="TelegramDesktop"] $workspace9
+
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
@@ -227,7 +232,7 @@ bindsym $mod+p mode "$mode_player"
 # mode to control logout, shutdown ...
 set $mode_system System [l] lock, [e] logout, [s] suspend, [h] hibernate, [r] reboot, [Shift+s] shutdown
 mode "$mode_system" {
-    bindsym l exec -mode "default", -no-startup-id $script_path/i3exit lock
+    bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default" 
     bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
     bindsym s exec --no-startup-id $script_path/i3exit suspend, mode "default"
     bindsym h exec --no-startup-id $script_path/i3exit hibernate, mode "default"
@@ -246,11 +251,6 @@ bindsym $sup+e exec nautilus # file explorer
 bindsym $sup+s exec spotify
 bindsym $sup+t exec thunderbird
 bindsym $sup+c exec telegram-desktop # chat
-
-# windows on specific workspaces
-for_window [class="Spotify"] move to workspace $workspace10
-assign [class="Firefox"] $workspace2
-assign [class="TelegramDesktop"] $workspace9
 
 # startup
 # # # # # # # # # #
