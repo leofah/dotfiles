@@ -261,9 +261,7 @@ exec xfce4-power-manager
 exec nm-applet
 # enable lock after suspend (or closing lid)
 exec xss-lock $script_path/i3exit lock
-# lock after 5 mins suspend after 10 mins
-# exec xautolock -time 5 -locker '$script_path/i3exit lock' -notifier 'xset dpms force off'
-# exec xautolock -time 7 -locker $script_path/i3exit suspend
+exec numlockx on
 
 # Wallpaper
 exec_always $script_path/setWallpaper
