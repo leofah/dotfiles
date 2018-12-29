@@ -1,0 +1,47 @@
+#!/bin/sh
+# handle vpn connections
+
+tum=tum
+stusta=stusta
+usage="Usage: $0 {connect|disconnect} {$tum|$stusta}"
+config_path=~/.config/vpn
+
+case "$1" in
+    connect)
+	case "$2" in 
+	    $tum)
+		# connect to tum
+		ciscovpn -s < $config_path/tum
+		;;
+	    $stusta)
+		# TODO connect to stusta
+		exit 3
+		;;
+	    *)
+        	echo $usage
+	        exit 2
+		;;
+	esac
+        ;;
+    disconnect)
+	case "$2" in 
+	    $tum)
+		# disconnect to tum
+		ciscovpn disconnect
+		;;
+	    $stusta)
+		# TODO disconnect from stusta
+		exit 3
+		;;
+	    *)
+        	echo $usage
+	        exit 2
+		;;
+	esac
+        ;;
+    *)
+        echo $usage
+        exit 2
+esac
+
+exit 0

@@ -97,7 +97,7 @@ bindsym $mod+a focus parent
 # names for the workspaces
 set $workspace1 "1 "
 set $workspace2 "2 "
-set $workspace3 3
+set $workspace3 "3 "
 set $workspace4 4
 set $workspace5 5
 set $workspace6 6
@@ -110,6 +110,8 @@ set $workspace10 "10 "
 for_window [class="Spotify"] move to workspace $workspace10
 assign [class="Firefox"] $workspace2
 assign [class="TelegramDesktop"] $workspace9
+assign [class="Thunderbird"] $workspace3
+
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -210,18 +212,18 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec $script_path/brightness inc # increase screen brightness
-bindsym XF86MonBrightnessDown exec $script_path/brightness dec # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id $script_path/brightness inc # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness dec # decrease screen brightness
 
 
 # Media player controls with mode
 set $mode_player Control Music | [P] Play Pause | [M,] Next | [N,] Previous
 mode  "$mode_player" {
-	bindsym p exec playerctl play-pause
-	bindsym m exec playerctl next
-	bindsym Right exec playerctl next
-	bindsym n exec playerctl previous
-	bindsym Left exec playerctl previous
+	bindsym p exec --no-startup-id playerctl play-pause
+	bindsym m exec --no-startup-id playerctl next
+	bindsym Right exec --no-startup-id playerctl next
+	bindsym n exec --no-startup-id playerctl previous
+	bindsym Left exec --no-startup-id playerctl previous
 
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -245,6 +247,20 @@ mode "$mode_system" {
 }
 bindsym $mod+i mode "$mode_system"
 
+set $mode_vpn VPN [] connect, [Shift] disconnect; [+t] tum, [+s] stusta
+mode "$mode_vpn" {
+	bindsym t exec --no-startup-id $script_path/vpn connect tum, mode "default"
+	bindsym Shift+t exec --no-startup-id $script_path/vpn disconnect tum, mode "default"
+
+	bindsym s exec --no-startup-id $script_path/vpn connect stusta, mode "default"
+	bindsym Shift+s exec --no-startup-id $script_path/vpn disconnect stusta, mode "default"
+
+        # back to normal: Enter or Escape
+	bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $sup+v mode "$mode_vpn"
+
 # start programs with keybinding
 bindsym $sup+f exec firefox
 bindsym $sup+e exec nautilus # file explorer
@@ -257,11 +273,11 @@ bindsym $sup+c exec telegram-desktop # chat
 
 exec i3-sensible-terminal
 # start networkmanager applet and power management to alert little power
-exec xfce4-power-manager
-exec nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id nm-applet
 # enable lock after suspend (or closing lid)
-exec xss-lock $script_path/i3exit lock
-exec numlockx on
+exec --no-startup-id xss-lock $script_path/i3exit lock
+exec --no-startup-id numlockx on
 
 # Wallpaper
-exec_always $script_path/setWallpaper
+exec_always --no-startup-id $script_path/setWallpaper
