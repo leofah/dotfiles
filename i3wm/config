@@ -246,6 +246,7 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 bindsym $mod+i mode "$mode_system"
+bindsym $mod+Shift+x exec $script_path/i3exit lock
 
 set $mode_vpn VPN [] connect, [Shift] disconnect; [+t] tum, [+s] stusta
 mode "$mode_vpn" {
@@ -260,6 +261,9 @@ mode "$mode_vpn" {
         bindsym Escape mode "default"
 }
 bindsym $sup+v mode "$mode_vpn"
+
+# take a screenshot and save file
+bindsym --release Print exec --no-startup-id $script_path/screenshot
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
