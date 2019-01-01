@@ -1,4 +1,4 @@
-#git aliases
+# git aliases
 
 alias g='git'
 alias gs='git status'
@@ -15,3 +15,6 @@ alias gb='git branch'
 alias gl='git log'
 alias gd='git diff'
 alias gch='git checkout'
+
+# Paths
+alias 5sem='cd ~/Documents/Studium/5.Semester'
