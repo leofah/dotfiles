@@ -29,6 +29,15 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# colors
+# set $bg-color	         #383C4A
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $indicator           #000000
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -39,7 +48,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec rofi -show run -config ~/.config/rofi/rofi.config 
+
 
 #set keyboard movement like vim
 set $keyboard_left h
@@ -168,15 +179,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# colors
-# set $bg-color	         #383C4A
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-set $indicator           #000000
-
 # window colors
 #                       border              background         text                 indicator
 client.focused          $bg-color           $bg-color          $text-color          $indicator
@@ -282,6 +284,8 @@ exec --no-startup-id nm-applet
 # enable lock after suspend (or closing lid)
 exec --no-startup-id xss-lock $script_path/i3exit lock
 exec --no-startup-id numlockx on
+
+exec --no-startup-id compton -f
 
 # Wallpaper
 exec_always --no-startup-id $script_path/setWallpaper
