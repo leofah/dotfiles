@@ -3,19 +3,21 @@
 
 tum=tum
 stusta=stusta
-usage="Usage: $0 {connect|disconnect} {$tum|$stusta}"
+connect=connect
+disconnect=disconnect
+usage="Usage: $0 {$connect|$disconnect} {$tum|$stusta}"
 config_path=~/.config/vpn
 
-case "$1" in
-    connect)
-	case "$2" in 
-	    $tum)
+case "$2" in
+    $tum)
+	case "$1" in
+	    $connect)
 		# connect to tum
 		ciscovpn -s < $config_path/tum
 		;;
-	    $stusta)
-		# TODO connect to stusta
-		exit 3
+	    $disconnect)
+		# disconnect to tum
+		ciscovpn disconnect
 		;;
 	    *)
         	echo $usage
@@ -23,13 +25,13 @@ case "$1" in
 		;;
 	esac
         ;;
-    disconnect)
-	case "$2" in 
-	    $tum)
-		# disconnect to tum
-		ciscovpn disconnect
+    $stusta)
+	case "$1" in
+	    $connect)
+		# TODO connect to stusta
+		exit 3
 		;;
-	    $stusta)
+	    $disconnect)
 		# TODO disconnect from stusta
 		exit 3
 		;;
