@@ -2,4 +2,4 @@
 
 file=~/Pictures/screenshots/$(date +%F_%H-%M-%S).png
 scrot -s $file
-# TODO xclip -sel clip -t $file
+xclip -selection clipboard -target image/png -i < $file
