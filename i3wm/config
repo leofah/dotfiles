@@ -151,11 +151,12 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # toggle workspace to other output (screen)
 bindsym $mod+Shift+p move workspace to output right
 
-set $mode_monitor Monitor Setting | [p] primary | [s] sceondary | [d] duplicate | [e] extend
+set $mode_monitor Monitor Setting | [p] primary | [s] sceondary | [d] duplicate | [m] mirror | [e] extend
 mode  "$mode_monitor" {
 	bindsym p exec --no-startup-id mons -o, mode "default"
 	bindsym s exec --no-startup-id mons -s, mode "default"
 	bindsym d exec --no-startup-id mons -d, mode "default"
+	bindsym m exec --no-startup-id mons -m, mode "default"
 	bindsym e exec --no-startup-id mons -e right, mode "default"
 
         # back to normal: Enter or Escape
