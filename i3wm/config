@@ -148,6 +148,23 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
+# toggle workspace to other output (screen)
+bindsym $mod+Shift+p move workspace to output right
+
+set $mode_monitor Monitor Setting | [p] primary | [s] sceondary | [d] duplicate | [e] extend
+mode  "$mode_monitor" {
+	bindsym p exec --no-startup-id mons -o, mode "default"
+	bindsym s exec --no-startup-id mons -s, mode "default"
+	bindsym d exec --no-startup-id mons -d, mode "default"
+	bindsym e exec --no-startup-id mons -e right, mode "default"
+
+        # back to normal: Enter or Escape
+	bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+p mode "$mode_monitor"
+
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -231,10 +248,10 @@ mode  "$mode_player" {
 	bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+p mode "$mode_player"
+bindsym $mod+m mode "$mode_player"
 
 # mode to control logout, shutdown ...
-set $mode_system System [l] lock, [e] logout, [s] suspend, [h] hibernate, [r] reboot, [Shift+s] shutdown
+set $mode_system System | [l] lock | [e] logout | [s] suspend | [h] hibernate | [r] reboot | [Shift+s] shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default" 
     bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
@@ -274,6 +291,8 @@ bindsym $sup+s exec spotify
 bindsym $sup+t exec thunderbird
 bindsym $sup+c exec telegram-desktop # chat
 
+bindsym $sup+Control+y exec nautilus ~/Documents/Studium/5.Semester/
+
 # startup
 # # # # # # # # # #
 
@@ -285,7 +304,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xss-lock $script_path/i3exit lock
 exec --no-startup-id numlockx on
 
-exec --no-startup-id compton -f
+exec --no-startup-id compton
 
 # Wallpaper
 exec_always --no-startup-id $script_path/setWallpaper
