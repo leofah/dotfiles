@@ -18,3 +18,7 @@ alias gch='git checkout'
 
 # Paths
 alias 5sem='cd ~/Documents/Studium/5.Semester'
+
+# show specific files
+alias music='cat ~/Documents/TODO/music.txt'
+alias movies='cat ~/Documents/TODO/movies.txt'
