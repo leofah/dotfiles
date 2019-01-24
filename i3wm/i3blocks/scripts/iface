@@ -21,7 +21,7 @@
 if [[ -n $BLOCK_INSTANCE ]]; then
   IF=$BLOCK_INSTANCE
 else
-  IF=$(ip route | awk '/^default/ { print $5 ; exit }')
+  IF=$(ip route | awk '/^default via/ { print $5 ; exit }')
 fi
 
 #------------------------------------------------------------------------

@@ -20,7 +20,7 @@
 if [[ -n $BLOCK_INSTANCE ]]; then
   INTERFACE=$BLOCK_INSTANCE
 else
-  INTERFACE=$(ip route | awk '/^default/ { print $5 ; exit }')
+  INTERFACE=$(ip route | awk '/^default via/ { print $5 ; exit }')
 fi
 
 # Issue #36 compliant.
