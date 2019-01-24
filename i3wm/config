@@ -287,6 +287,7 @@ bindsym $sup+v mode "$mode_vpn"
 
 # take a screenshot and save file
 bindsym --release Print exec --no-startup-id $script_path/screenshot
+bindsym $mod+Print exec --no-startup-id $script_path/screenshot all
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
