@@ -1,12 +1,18 @@
 #!/bin/sh
 # handle vpn connections
 
+# exit code:	0 	all fine, (stusta: no state change
+# 		1 	(stusta state changed
+# 		2 	wrong usage
+# 		-1	some error
+
 tum=tum
 stusta=stusta
 connect=connect
 disconnect=disconnect
 usage="Usage: $0 {$connect|$disconnect} {$tum|$stusta}"
-config_path=~/.config/vpn
+config_path=/home/leo/.config/vpn
+vpn_stusta=/home/leo/scripts/i3/vpn_stusta
 
 case "$2" in
     $tum)
@@ -28,12 +34,12 @@ case "$2" in
     $stusta)
 	case "$1" in
 	    $connect)
-		# TODO connect to stusta
-		exit 3
+		sudo $vpn_stusta connect
+		exit $?
 		;;
 	    $disconnect)
-		# TODO disconnect from stusta
-		exit 3
+		sudo $vpn_stusta disconnect
+		exit $?
 		;;
 	    *)
         	echo $usage
