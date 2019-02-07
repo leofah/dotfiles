@@ -242,7 +242,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness dec #
 # Media player controls with mode
 set $mode_player Control Music | [P] Play Pause | [M,] Next | [N,] Previous
 mode  "$mode_player" {
-	bindsym p exec --no-startup-id playerctl play-pause
+	bindsym p exec --no-startup-id playerctl play-pause, mode "default"
 	bindsym m exec --no-startup-id playerctl next
 	bindsym Right exec --no-startup-id playerctl next
 	bindsym n exec --no-startup-id playerctl previous
