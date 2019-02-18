@@ -1,5 +1,4 @@
 # git aliases
-
 alias g='git'
 alias gs='git status'
 alias gi='git init'
@@ -22,3 +21,8 @@ alias 5sem='cd ~/Documents/Studium/5.Semester'
 # show specific files
 alias music='cat ~/Documents/TODO/music.txt'
 alias movies='cat ~/Documents/TODO/movies.txt'
+
+# run alias commands with sudo
+alias sudo='sudo '
+
+alias o='xdg-open'

@@ -300,7 +300,6 @@ bindsym $sup+Control+y exec nautilus ~/Documents/Studium/5.Semester/
 # # # # # # # # # #
 
 exec i3-sensible-terminal
-exec thunderbird
 # start networkmanager applet and power management to alert little power
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id nm-applet
