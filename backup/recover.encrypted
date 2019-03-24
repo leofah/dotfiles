@@ -1,0 +1,69 @@
+#!/bin/bash
+
+### !!!!!! ###
+# to recover correctly the password and the volume (encfs6_config) must be known UNECRYPDED
+# it is recommended to save this script with the volume in a keepass database where the password is known and which is available if the data needs to be restored
+### !!!!!! ###
+
+# the recovered file are only accessable on a specified mountpoint. From there the needed files or directories can be extracted
+# to unmount all mounted file run the generated script unmount.recover.sh
+
+# all variables should have the same value as in the backup script
+
+ENCFS6_CONFIG="/root/auto_backup/.encfs6.xml"
+PASSWORD="vBmfLBknxQeXYGCoqdqF"
+
+#SOURCES=(/root /etc /home /boot )
+SOURCES=(/root )
+TARGET="/mnt/mammut/private/enc_backup/"
+MOUNTPOINT="/mnt/mammut"
+SERVER="mammut"
+RESTOREMOUNTPOINT="/restore"
+
+ENC="/.enc"
+
+### do not edit ###
+
+MOUNT="/bin/mount"; FGREP="/bin/fgrep"; MKDIR="/bin/mkdir"
+ECHO="/bin/echo"; LAST="last"; CHMOD="/bin/chmod"
+ENCFS="/usr/bin/encfs"; SSHFS="/usr/bin/sshfs"; FUSERMOUNT="/bin/fusermount"
+
+FUSEMOUNTPOINTS=()
+
+# mount sshfs
+if [ -z $($MOUNT | $FGREP "$MOUNTPOINT") ]; then
+	$SSHFS "$SERVER": "$MOUNTPOINT"
+	FUSEMOUNTPOINTS+=("$MOUNTPOINT")
+fi
+
+# mount unecrypted file systems
+export ENCFS6_CONFIG
+
+if [ "${TARGET:${#TARGET}-1:1}" != "/" ]; then
+	TARGET=$TARGET/
+fi
+LOCATION=$TARGET$LAST$ENC
+LOCATION=${LOCATION%/}
+for SOURCE in "${SOURCES[@]}"
+do
+	THIS="$RESTOREMOUNTPOINT$SOURCE"
+	$MKDIR -p "$THIS" 
+	if [ -z $($MOUNT | $FGREP "$THIS")]; then
+		$ECHO $PASSWORD | $ENCFS --stdinpass "$LOCATION$SOURCE" "$THIS"
+		if [ $? -ne 0 ]; then
+			ERROR=1
+		fi
+		FUSEMOUNTPOINTS+=("$THIS")
+	fi
+done
+
+UNMOUNT="unmount.recover.sh"
+
+$ECHO "#!/bin/bash" > $UNMOUNT
+
+for MOUNT in ${FUSEMOUNTPOINTS[@]}
+do
+	$ECHO $FUSERMOUNT -u $MOUNT >> $UNMOUNT
+done
+
+$CHMOD 744 $UNMOUNT

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+test=/home/leo/scripts/i3/vpn_info
+up=U
+down=D
+
+$test tum > /dev/null
+if [ $? -eq 0 ]
+then
+	text="Tum: $up"
+else
+	text="Tum: $down"
+fi
+
+$test stusta > /dev/null
+if [ $? -eq 0 ]
+then
+	text="$text, Stusta: $up"
+else
+	text="$text, Stusta: $down"
+fi
+
+echo $text

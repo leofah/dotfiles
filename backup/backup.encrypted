@@ -1,0 +1,110 @@
+#!/bin/bash
+# Simple backup with rsync and encryption
+
+SOURCES=(/root ) 	# only directorys begining with /
+#SOURCES=(/root /etc /home /boot ) 	# only directorys begining with /
+TARGET="/mnt/mammut/private/enc_backup"
+MOUNTPOINT="/mnt/mammut"		# target mountpoint 
+SERVER="mammut"			# ssh config name of backup server
+
+PASSWORD="vBmfLBknxQeXYGCoqdqF"				# volume password
+ENCFS6_CONFIG="/root/auto_backup/.encfs6.xml"	# volume key for encfs
+ENC="/.enc"				# encryption mountpoint
+
+
+# edit or comment with "#"
+#LISTPACKAGES=listdebianpackages        # local-mode
+MONTHROTATE=monthrotate                 # use DD instead of YYMMDD
+
+RSYNCCONF=(--delete)
+#MAILREC="user@domain"
+
+### do not edit ###
+
+MOUNT="/bin/mount"; FGREP="/bin/fgrep"; MKDIR="/bin/mkdir"
+LN="/bin/ln"; ECHO="/bin/echo"; DATE="/bin/date"; RM="/bin/rm"
+DPKG="/usr/bin/dpkg"; AWK="/usr/bin/awk"; MAIL="/usr/bin/mail"
+CUT="/usr/bin/cut"; TR="/usr/bin/tr"; RSYNC="/usr/bin/rsync"
+LAST="last"; INC="--link-dest=$TARGET/$LAST"
+ENCFS="/usr/bin/encfs"; SSHFS="/usr/bin/sshfs"; FUSERMOUNT="/bin/fusermount"
+
+LOG=$0.log
+$DATE > $LOG
+
+FUSEMOUNTPOINTS=()
+
+# mount files encrypted at $ENC$SOURCE
+export ENCFS6_CONFIG
+ENC=${ENC%/}
+for SOURCE in "${SOURCES[@]}"
+do
+	$MKDIR -p "$ENC$SOURCE" >> $LOG  2>&1 
+	$ECHO $ENCFS --reverse --stdinpass "$SOURCE" "$ENC$SOURCE" >> $LOG
+	$ECHO $PASSWORD | $ENCFS --reverse --stdinpass "$SOURCE" "$ENC$SOURCE" >> $LOG 2>&1 
+	if [ $? -ne 0 ]; then
+		ERROR=1
+	fi 
+	FUSEMOUNTPOINTS+=("$ENC$SOURCE")
+done
+
+# mount server with sshfs
+MOUNTED=$($MOUNT | $FGREP "$MOUNTPOINT");
+if [ -z "$MOUNTED" ]; then
+	$ECHO  $SSHFS "$SERVER": "$MOUNTPOINT" "-o ConnectTimeout=2" >> $LOG
+	$SSHFS "$SERVER": "$MOUNTPOINT" -o ConnectTimeout=2 >> $LOG 2>&1
+	if [ $? -ne 0 ]; then
+		ERROR=1
+	fi
+	FUSEMOUNTPOINTS+=("$MOUNTPOINT")
+fi
+
+if [ "${TARGET:${#TARGET}-1:1}" != "/" ]; then
+	TARGET=$TARGET/
+fi
+
+if [ "$LISTPACKAGES" ]; then
+	$ECHO "$DPKG --get-selections | $AWK '!/deinstall|purge|hold/'|$CUT -f1 | $TR '\n' ' '" >> $LOG
+	$DPKG --get-selections | $AWK '!/deinstall|purge|hold/'|$CUT -f1 |$TR '\n' ' '  >> $LOG  2>&1 
+fi
+
+MOUNTED=$($MOUNT | $FGREP "$MOUNTPOINT");
+
+if [ -z "$MOUNTPOINT" ] || [ "$MOUNTED" ]; then
+	if [ -z "$MONTHROTATE" ]; then
+		TODAY=$($DATE +%y%m%d)
+	else
+		TODAY=$($DATE +%d)
+	fi
+
+	SOURCE=$ENC      
+	$ECHO "$RSYNC -avR --no-o --no-g \"$SOURCE\" ${RSYNCCONF[@]} $TARGET$TODAY $INC"  >> $LOG 
+	$RSYNC -avR --no-o --no-g "$SOURCE" "${RSYNCCONF[@]}" "$TARGET"$TODAY $INC  >> $LOG 2>&1 
+	if [ $? -ne 0 ]; then
+		ERROR=1
+	fi 
+
+	$ECHO "$LN -nsf $TODAY $TARGET$LAST" >> $LOG
+	$LN -nsf $TODAY "$TARGET"$LAST  >> $LOG 2>&1 
+	if [ $? -ne 0 ]; then
+		ERROR=1
+	fi
+else
+	$ECHO "$MOUNTPOINT not mounted" >> $LOG
+	ERROR=1
+fi
+
+
+# unmount all here mounted
+for FUSEMOUNTED in "${FUSEMOUNTPOINTS[@]}"
+do
+	$FUSERMOUNT -u $FUSEMOUNTED  >> $LOG  2>&1 
+done
+
+$DATE >> $LOG
+if [ -n "$MAILREC" ]; then
+	if [ $ERROR ];then
+		$MAIL -s "Error Backup $LOG" $MAILREC < $LOG
+	else
+		$MAIL -s "Backup $LOG" $MAILREC < $LOG
+	fi
+fi
