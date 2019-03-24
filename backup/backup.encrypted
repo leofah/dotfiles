@@ -7,7 +7,7 @@ TARGET="/mnt/mammut/private/enc_backup"
 MOUNTPOINT="/mnt/mammut"		# target mountpoint 
 SERVER="mammut"			# ssh config name of backup server
 
-PASSWORD="vBmfLBknxQeXYGCoqdqF"				# volume password
+PASSWORD="Password"				# volume password
 ENCFS6_CONFIG="/root/auto_backup/.encfs6.xml"	# volume key for encfs
 ENC="/.enc"				# encryption mountpoint
 

@@ -11,7 +11,7 @@
 # all variables should have the same value as in the backup script
 
 ENCFS6_CONFIG="/root/auto_backup/.encfs6.xml"
-PASSWORD="vBmfLBknxQeXYGCoqdqF"
+PASSWORD="Password"
 
 #SOURCES=(/root /etc /home /boot )
 SOURCES=(/root )
@@ -32,8 +32,14 @@ FUSEMOUNTPOINTS=()
 
 # mount sshfs
 if [ -z $($MOUNT | $FGREP "$MOUNTPOINT") ]; then
-	$SSHFS "$SERVER": "$MOUNTPOINT"
-	FUSEMOUNTPOINTS+=("$MOUNTPOINT")
+	$SSHFS "$SERVER": "$MOUNTPOINT" -o ConnectTimeout=5
+	if [ $? -ne 0 ]; then
+		ERROR=1
+		$ECHO "Server cannot be mounted, aborting ..."
+		exit $ERROR
+	else
+		FUSEMOUNTPOINTS+=("$MOUNTPOINT")
+	fi
 fi
 
 # mount unecrypted file systems
@@ -52,8 +58,9 @@ do
 		$ECHO $PASSWORD | $ENCFS --stdinpass "$LOCATION$SOURCE" "$THIS"
 		if [ $? -ne 0 ]; then
 			ERROR=1
+		else
+			FUSEMOUNTPOINTS+=("$THIS")
 		fi
-		FUSEMOUNTPOINTS+=("$THIS")
 	fi
 done
 
