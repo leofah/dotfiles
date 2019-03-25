@@ -2,7 +2,6 @@
 # handle vpn connections
 
 # exit code:	0 	all fine, (stusta: no state change
-# 		1 	(stusta state changed
 # 		2 	wrong usage
 # 		-1	some error
 
