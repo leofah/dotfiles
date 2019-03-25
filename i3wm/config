@@ -77,6 +77,12 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
 # split in horizontal orientation
 bindsym $mod+h split h
 
@@ -289,12 +295,12 @@ bindsym $mod+Print exec --no-startup-id $script_path/screenshot all
 
 # start programs with keybinding
 bindsym $sup+f exec firefox
-bindsym $sup+e exec nautilus # file explorer
+bindsym $sup+e exec thunar # file explorer
 bindsym $sup+s exec spotify
 bindsym $sup+t exec thunderbird
 bindsym $sup+c exec telegram-desktop # chat
 
-bindsym $sup+Control+y exec nautilus ~/Documents/Studium/5.Semester/
+bindsym $sup+Control+y exec thunar ~/Documents/Studium/5.Semester/
 
 # startup
 # # # # # # # # # #
