@@ -51,7 +51,7 @@ fi
 # connect vpn if not connected
 $VPNCHECK
 WASCONNECTED=$?
-if [ $? -ne 0 ]; then
+if [ $WASCONNECTED -ne 0 ]; then
 	$ECHO "connecting vpn..."
 	$VPNACT
 	if [ $? -ne 0 ]; then
