@@ -5,8 +5,8 @@
 SOURCES=(/etc /home /boot /root )
 EXCLUDE=(.cache .thumbnails 
 Trash 
-/home/\*/.local/share/JetBrains/Toolbox 
-/home/\*/.local/share/MultiMC
+.local/share/JetBrains/Toolbox
+.local/share/MultiMC
 .local/share/Steam
 ) # space should be escaped properly
 TARGET="/media/leo/BackUp_Ubuntu/rsync_auto"
