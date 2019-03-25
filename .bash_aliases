@@ -26,3 +26,4 @@ alias movies='cat ~/Documents/TODO/movies.txt'
 alias sudo='sudo '
 
 alias o='xdg-open'
+alias v='vim'
