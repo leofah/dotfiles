@@ -16,7 +16,7 @@ alias gd='git diff'
 alias gch='git checkout'
 
 # Paths
-alias 5sem='cd ~/Documents/Studium/5.Semester'
+alias 6sem='cd ~/Documents/Studium/6.Semester'
 
 # show specific files
 alias music='cat ~/Documents/TODO/music.txt'
