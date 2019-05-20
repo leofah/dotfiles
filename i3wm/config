@@ -29,6 +29,9 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# path to the scripts
+set $script_path /home/leo/scripts/i3
+
 # colors
 # set $bg-color	         #383C4A
 set $bg-color 	         #2f343f
@@ -157,13 +160,15 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # toggle workspace to other output (screen)
 bindsym $mod+Shift+p move workspace to output right
 
-set $mode_monitor Monitor Setting | [p] primary | [s] sceondary | [d] duplicate | [m] mirror | [e] extend
+set $mode_monitor Monitor Setting | [p] primary | [s] sceondary | [d] duplicate | [m] mirror | [e] extend | [w] change wallpaper
 mode  "$mode_monitor" {
-	bindsym p exec --no-startup-id mons -o, mode "default"
-	bindsym s exec --no-startup-id mons -s, mode "default"
-	bindsym d exec --no-startup-id mons -d, mode "default"
-	bindsym m exec --no-startup-id mons -m, mode "default"
-	bindsym e exec --no-startup-id mons -e right, mode "default"
+	bindsym p exec --no-startup-id mons -o, exec --no-startup-id $script_path/setWallpaper, mode "default"
+	bindsym s exec --no-startup-id mons -s, exec --no-startup-id $script_path/setWallpaper, mode "default"
+	bindsym d exec --no-startup-id mons -d, exec --no-startup-id $script_path/setWallpaper, mode "default"
+	bindsym m exec --no-startup-id mons -m, exec --no-startup-id $script_path/setWallpaper, mode "default"
+	bindsym e exec --no-startup-id mons -e right, exec --no-startup-id $script_path/setWallpaper, mode "default"
+
+	bindsym w exec --no-startup-id $script_path/setWallpaper
 
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -230,8 +235,6 @@ bar {
 	}
 }
 
-# path to the scripts
-set $script_path /home/leo/scripts/i3
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%, exec --no-startup-id pactl set-sink-mute 0 0  #increase sound volume
@@ -316,4 +319,4 @@ exec --no-startup-id numlockx on
 exec --no-startup-id compton
 
 # Wallpaper
-exec_always --no-startup-id $script_path/setWallpaper
+exec --no-startup-id $script_path/slideWallpaper

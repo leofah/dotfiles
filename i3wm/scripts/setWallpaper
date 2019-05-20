@@ -1,2 +1,5 @@
 #!/bin/sh
-feh --bg-scale ~/Pictures/wallpaper/sunset.jpg
+
+wallpapers=~/Pictures/wallpaper
+
+feh --randomize --bg-scale $wallpapers/*

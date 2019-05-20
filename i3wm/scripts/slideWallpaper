@@ -1,0 +1,10 @@
+#!/bin/sh
+
+breakmin=10
+setWallpaper=./setWallpaper
+
+while [ true ]
+do
+	$setWallpaper
+	sleep "$breakmin"m
+done
