@@ -41,6 +41,12 @@ set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 set $indicator           #000000
 
+# movement
+set $mov_left h
+set $mov_down j
+set $mov_up k
+set $mov_right l
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -50,31 +56,26 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# start program launcher rofi
 bindsym $mod+d exec rofi -show run -config ~/.config/rofi/rofi.config 
 
-
-#set keyboard movement like vim
-set $keyboard_left h
-
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+bindsym $mod+$mov_left focus left
+bindsym $mod+$mov_down focus down
+bindsym $mod+$mov_up focus up
+bindsym $mod+$mov_right focus right
 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+$mov_left move left
+bindsym $mod+Shift+$mov_down move down
+bindsym $mod+Shift+$mov_up move up
+bindsym $mod+Shift+$mov_right move right
 
-# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -87,7 +88,7 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+n split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -190,10 +191,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym $mov_left resize shrink width 10 px or 10 ppt
+        bindsym $mov_up resize grow height 10 px or 10 ppt
+        bindsym $mov_down resize shrink height 10 px or 10 ppt
+        bindsym $mov_right resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -244,6 +245,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id $script_path/brightness inc # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness dec # decrease screen brightness
+bindsym $mod+XF86MonBrightnessUp exec --no-startup-id xbacklight -set 100 # highest brightness
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id xbacklight -set 1 # lowest brightness
+
 
 
 # Media player controls with mode

@@ -1,37 +1,32 @@
 #!/bin/bash
 
-cur=$(xbacklight) 
-cur=${cur%.*}
-if [ $cur -lt 2 ]
+# adds relative $percent to the brightness
+
+percent=15
+
+cur=$(xbacklight)
+inc=$(bc <<< $cur*$percent/100)
+if [ ${inc%.*} -le 1 ]
 then
-	val=0
-elif [ $cur -lt 5 ] 
-then
-	val=1
-elif [ $cur -lt 20 ]
-then
-	val=5
-elif [ $cur -lt 60 ]
-then
-	val=10
-else
-	val=20
+	inc=1
 fi
 
 case "$1" in
     inc)
-	if [ $val -lt 1 ]
-	then
-		val=1
-	fi
-	xbacklight -inc $val
+
         ;;
     dec)
-	xbacklight -dec $val
-        ;;
+            inc=-$inc
+	;;
     *)
         echo "Usage: $0 {inc|dec}"
         exit 2
 esac
 
-exit 0
+echo "previous: $(xbacklight)"
+if [[ $1 == "dec" && ${cur%.*} -lt 1 ]]
+then
+	exit
+fi
+xbacklight -inc $inc
+echo "now: $(xbacklight)"
