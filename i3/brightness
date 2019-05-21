@@ -13,7 +13,6 @@ fi
 
 case "$1" in
     inc)
-
         ;;
     dec)
             inc=-$inc
@@ -23,10 +22,8 @@ case "$1" in
         exit 2
 esac
 
-echo "previous: $(xbacklight)"
 if [[ $1 == "dec" && ${cur%.*} -lt 1 ]]
 then
 	exit
 fi
 xbacklight -inc $inc
-echo "now: $(xbacklight)"
