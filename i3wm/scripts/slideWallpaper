@@ -1,6 +1,6 @@
 #!/bin/sh
 
-breakmin=10
+breakmin=60
 setWallpaper=~/scripts/i3/setWallpaper
 
 while [ true ]
