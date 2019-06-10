@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# source: https://pastebin.com/ZpYghBkQ
+# just inserted variables and chaned i3lock command
+
 ICON=$HOME/.xlock/icon.png
 TMPBG=/tmp/screen.png
  

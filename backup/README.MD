@@ -1,3 +1,10 @@
-Some of the backup scripts rely on the script backup.rsync.raw which I got from [Wiki Ubutuntuusers](https://wiki.ubuntuusers.de/Skripte/Backup_mit_RSYNC/)
-they are an adaption to my use.
-I also created a encrypted backup (and the recover from this backup) based on the previous script. I may change this script to use tar instead of rsync to preserve the file owners.
+Backup
+======
+
+The backup scripts rely on the script [backup.rsync.raw](https://github.com/leofah/scripts/blob/master/backup/backup.rsync.raw) which I got from [Wiki Ubutuntuusers](https://wiki.ubuntuusers.de/Skripte/Backup_mit_RSYNC/)
+This script is changed to my use of daily and weekly Backups with a defined mountpoint.
+
+Encrypted
+---------
+
+I also created an encrypted backup (and the recover from this backup) based on the previous script. This script is not in use and not tested, so use at your own warranty.
