@@ -2,4 +2,4 @@
 
 wallpapers=~/Pictures/wallpaper
 
-feh --randomize --bg-scale $wallpapers/*
+feh --bg-scale $wallpapers/$(ls $wallpapers | shuf -n 1)
