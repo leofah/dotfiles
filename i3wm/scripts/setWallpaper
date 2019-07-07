@@ -1,5 +1,0 @@
-#!/bin/sh
-
-wallpapers=~/Pictures/wallpaper
-
-feh --bg-scale $wallpapers/$(ls $wallpapers | shuf -n 1)
