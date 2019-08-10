@@ -2,4 +2,4 @@
 
 wallpapers=~/Pictures/wallpaper
 
-feh --bg-scale $wallpapers/$(ls $wallpapers | shuf -n 1)
+feh --bg-scale $(find $wallpapers -type f | shuf -n 1)
