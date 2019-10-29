@@ -1,0 +1,9 @@
+# copy selection to system clipboard
+set selection-clipboard clipboard
+
+set smooth-scroll true
+set scroll-page-aware true
+
+# Keybindings
+map <Right> scroll full-down
+map <Left> scroll full-up
