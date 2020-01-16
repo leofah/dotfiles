@@ -4,7 +4,7 @@
 
 percent=20
 
-cur=$(xbacklight)
+cur=$(light)
 inc=$(bc <<< $cur*$percent/100)
 if [ ${inc%.*} -le 1 ]
 then
@@ -13,17 +13,15 @@ fi
 
 case "$1" in
     inc)
+	    light -A $inc
         ;;
     dec)
-            inc=-$inc
+	if [[ ${cur%.*} -gt 1 ]]
+	then
+	    light -U $inc
+	fi
 	;;
     *)
         echo "Usage: $0 {inc|dec}"
         exit 2
 esac
-
-if [[ $1 == "dec" && ${cur%.*} -lt 1 ]]
-then
-	exit
-fi
-xbacklight -inc $inc
