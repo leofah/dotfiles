@@ -1,1 +1,2 @@
-update
+# ignore all files. They must be tracked explicitly
+*
