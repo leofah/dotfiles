@@ -8,8 +8,8 @@ Trash
 .local/share/JetBrains/Toolbox
 .local/share/MultiMC
 .local/share/Steam
+cache
 ) # space should be escaped properly
-TARGET="/media/leo/BackUp_Ubuntu/rsync_auto"
 
 # edit or comment with "#"
 LISTPACKAGES=listdebianpackages        # local-mode and tossh-mode
@@ -17,8 +17,10 @@ LISTPACKAGES=listdebianpackages        # local-mode and tossh-mode
 
 EXCLUDECONF=$(for i in ${EXCLUDE[@]}; do echo --exclude=$i; done)
 RSYNCCONF=(--delete-after --delete -h $EXCLUDECONF)
-MOUNTPOINT="/media/leo/BackUp_Ubuntu"               # check local mountpoint
+MOUNTPOINT="/run/media/leo/BackUp_Ubuntu"               # check local mountpoint
 MAILREC="backup@localhost.com"
+
+TARGET="$MOUNTPOINT/rsync_auto"
 
 #SSHUSER="sshuser"
 #FROMSSH="fromssh-server"
@@ -33,7 +35,7 @@ fi
 
 MOUNT="/bin/mount"; FGREP="/bin/fgrep"; SSH="/usr/bin/ssh"
 LN="/bin/ln"; ECHO="/bin/echo"; DATE="/bin/date"; RM="/bin/rm"
-DPKG="/usr/bin/dpkg"; AWK="/usr/bin/awk"; MAIL="/usr/bin/mail"
+PACMAN="/usr/bin/pacman"; AWK="/usr/bin/awk"; MAIL="/usr/bin/mail"
 CUT="/usr/bin/cut"; TR="/usr/bin/tr"; RSYNC="/usr/bin/rsync"
 LAST="last"; INC="--link-dest=$TARGET$LAST"
 
@@ -41,8 +43,8 @@ LOG=$0.log
 $DATE > $LOG
 
 if [ "$LISTPACKAGES" ] && [ -z "$FROMSSH" ]; then
-  $ECHO "$DPKG --get-selections | $AWK '!/deinstall|purge|hold/'|$CUT -f1 | $TR '\n' ' '" >> $LOG
-  $DPKG --get-selections | $AWK '!/deinstall|purge|hold/'|$CUT -f1 |$TR '\n' ' '  >> $LOG  2>&1 
+  $ECHO "$PACMAN -Qe | $CUT -f1 | $TR '\n' ' '" >> $LOG
+  $PACMAN -Qe | $CUT -f1 | $TR '\n' ' '  >> $LOG  2>&1
 fi
 
 if [ "$MOUNTPOINT" ]; then
