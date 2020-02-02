@@ -10,7 +10,7 @@
 connect=connect
 disconnect=disconnect
 vpn_info=/home/leo/scripts/i3/vpn_info
-config=/home/leo/.config/vpn/stusta
+config=/home/leo/.config/vpn/stusta.conf
 
 case "$1" in
 	$connect)
