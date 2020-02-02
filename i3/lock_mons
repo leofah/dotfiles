@@ -1,38 +1,7 @@
 #!/bin/bash
 
-# source: https://pastebin.com/ZpYghBkQ
-# just inserted variables and chaned i3lock command
-
-ICON=$HOME/.xlock/icon.png
-TMPBG=/tmp/screen.png
- 
-scrot $TMPBG
-convert $TMPBG -scale 10% -scale 1000% $TMPBG
- 
-if [[ -f $ICON ]]
-then
-    # placement x/y
-    PX=0
-    PY=0
-    # lockscreen image info
-    R=$(file $ICON | grep -o '[0-9]* x [0-9]*')
-    RX=$(echo $R | cut -d' ' -f 1)
-    RY=$(echo $R | cut -d' ' -f 3)
- 
-    SR=$(xrandr --query | grep ' connected' | sed 's/primary //' | cut -f3 -d' ')
-    for RES in $SR
-    do
-        # monitor position/offset
-        SRX=$(echo $RES | cut -d'x' -f 1)                   # x pos
-        SRY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 1)  # y pos
-        SROX=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 2) # x offset
-        SROY=$(echo $RES | cut -d'x' -f 2 | cut -d'+' -f 3) # y offset
-	PX=$(($SROX + $SRX/2 - $RX/2))
-	PY=$(($SROY + $SRY/2 - $RY/2))
-	
-	echo $PX $PY $RX $RY
-        convert $TMPBG $ICON -geometry +$PX+$PY -composite -matte  $TMPBG
-        echo "done"
-    done
-fi
-i3lock -e -n -i $TMPBG
+i3lock  --force-clock --blur=5 --radius=20 --ring-width=2 \
+	--indpos=" x + 2*r + 150 : y + h -2* r " --timepos=" ix - 140 : iy + 10" --datepos=" tx : ty - 20 "  \
+	--time-align=1 --date-align=1 --timesize=15 \
+	--timecolor=ffffff66 --datecolor=ffffff66 \
+	--veriftext="" 
