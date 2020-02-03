@@ -9,10 +9,42 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Varibales
+# # # # # #
+
 # mod Key: Windows
 set $mod Mod4
 # sup Key to start programs: Alt
 set $sup Mod1 
+
+set $script_path /home/leo/scripts/i3
+set $term alacritty
+
+# colors
+set $bg-color 	         #4f949f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+set $indicator           #000000
+
+# movement
+set $mov_left h
+set $mov_down j
+set $mov_up k
+set $mov_right l
+
+# names for the workspaces
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 4
+set $workspace5 "5 "
+set $workspace6 6
+set $workspace7 7
+set $workspace8 "8 "
+set $workspace9 "9 "
+set $workspace10 "10 "
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -29,29 +61,12 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-# path to the scripts
-set $script_path /home/leo/scripts/i3
-
-# colors
-# set $bg-color	         #383C4A
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-set $indicator           #000000
-
-# movement
-set $mov_left h
-set $mov_down j
-set $mov_up k
-set $mov_right l
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -113,24 +128,14 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# names for the workspaces
-set $workspace1 "1 "
-set $workspace2 "2 "
-set $workspace3 "3 "
-set $workspace4 4
-set $workspace5 "5 "
-set $workspace6 6
-set $workspace7 7
-set $workspace8 "8 "
-set $workspace9 "9 "
-set $workspace10 "10 "
-
 # windows on specific workspaces
-assign [class="Firefox"] $workspace2
+assign [class="firefox"] $workspace2
 assign [class="Steam"] $workspace8
 assign [class="Thunderbird"] $workspace3
-assign [class="qpdfview"] $workspace5
+assign [class="Zathura"] $workspace5
 assign [class="TelegramDesktop"] $workspace9
+assign [class="discord"] $workspace9
+assign [class="Riot"] $workspace9
 for_window [class="Spotify"] move to workspace $workspace10
 
 
@@ -196,22 +201,20 @@ client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-co
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator
 
-# border
-# default_border normal
-hide_edge_borders both
+for_window [class=".*"] border pixel 2
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
 	position top
-	font pango:FontAwesome 8
+	font pango:Ubuntu Nerd Font 8
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	tray_output primary
 	colors {
 		background $inactive-bg-color
 	    	separator #757575
 		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
+		focused_workspace  $inactive-bg-color $inactive-bg-color $text-color
 		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
 		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
 	}
@@ -228,8 +231,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id $script_path/brightness inc # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness dec # decrease screen brightness
-bindsym $mod+XF86MonBrightnessUp exec --no-startup-id xbacklight -set 100 # highest brightness
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id xbacklight -set 1 # lowest brightness
+bindsym $mod+XF86MonBrightnessUp exec --no-startup-id light -S 100 # highest brightness
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id light -S 1 # lowest brightness
 
 # toggle workspace to other output (screen)
 bindsym $mod+Shift+p move workspace to output right
@@ -268,11 +271,11 @@ bindsym $mod+w mode "$mode_wallpaper"
 # Media player controls with mode
 set $mode_player Control Music | [P] Play Pause | [N,] Previous | [M,] Next
 mode  "$mode_player" {
-	bindsym p exec --no-startup-id playerctl play-pause, mode "default"
-	bindsym m exec --no-startup-id playerctl next
-	bindsym Right exec --no-startup-id playerctl next
-	bindsym n exec --no-startup-id playerctl previous
-	bindsym Left exec --no-startup-id playerctl previous
+	bindsym p exec --no-startup-id playerctl --player='spotify' play-pause, mode "default"
+	bindsym m exec --no-startup-id playerctl --player='spotify' next
+	bindsym Right exec --no-startup-id playerctl --player='spotify' next
+	bindsym n exec --no-startup-id playerctl --player='spotify' previous
+	bindsym Left exec --no-startup-id playerctl --player='spotify' previous
 
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -315,27 +318,25 @@ bindsym $sup+v mode "$mode_vpn"
 bindsym --release Print exec --no-startup-id $script_path/screenshot
 bindsym $mod+Print exec --no-startup-id $script_path/screenshot all
 
-# start programs with keybinding
-bindsym $sup+f exec firefox
-bindsym $sup+e exec thunar # file explorer
-bindsym $sup+s exec spotify
-bindsym $sup+t exec thunderbird
-bindsym $sup+c exec --no-startup-id telegram-desktop
-
-bindsym $sup+Control+y exec thunar ~/Documents/Studium/5.Semester/
-
 # startup
 # # # # # # # # # #
 
-exec i3-sensible-terminal
-# start networkmanager applet and power management to alert little power
-exec --no-startup-id xfce4-power-manager
+# start programs with keybinding
+bindsym $sup+f exec firefox
+bindsym $sup+s exec spotify
+bindsym $sup+t exec thunderbird
+bindsym $sup+c exec --no-startup-id telegram-desktop
+bindsym $sup+r exec $term -e ranger
+bindsym $sup+h exec $term -e htop
+
+exec $term
+exec firefox
+
+# background startup
 exec --no-startup-id nm-applet
-# enable lock after suspend (or closing lid)
 exec --no-startup-id xss-lock $script_path/i3exit lock
 exec --no-startup-id numlockx on
 
-exec --no-startup-id compton
-
-# Wallpaper
+# Wallpaper, composite manager
 exec --no-startup-id $script_path/slideWallpaper
+exec --no-startup-id picom
