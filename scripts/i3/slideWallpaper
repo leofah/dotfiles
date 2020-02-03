@@ -1,0 +1,10 @@
+#!/bin/sh
+
+breakmin=60
+setWallpaper=~/scripts/i3/setWallpaper
+
+while [ true ]
+do
+	$setWallpaper
+	sleep "$breakmin"m
+done

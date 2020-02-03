@@ -1,0 +1,7 @@
+#!/bin/bash
+
+i3lock  --force-clock --blur=5 --radius=20 --ring-width=2 \
+	--indpos=" x + 2*r + 150 : y + h -2* r " --timepos=" ix - 140 : iy + 10" --datepos=" tx : ty - 20 "  \
+	--time-align=1 --date-align=1 --timesize=15 \
+	--timecolor=ffffff66 --datecolor=ffffff66 \
+	--veriftext="" 
