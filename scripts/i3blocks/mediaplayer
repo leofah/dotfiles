@@ -28,7 +28,22 @@ my $player_arg = "";
 
 if ($BLOCK_INSTANCE) {
     $player_arg = "--player='$BLOCK_INSTANCE'";
+} else {
+    # use the first availabe running player
+    my @players = qx(playerctl --list-all);
+    foreach my $player (@players) {
+	if (qx(playerctl status --player=$player) eq "Playing\n") {
+	    $player_arg = "--player='$player'";
+	    last;
+	}
+    }
 }
+if ($player_arg eq "") {
+    # use spotify as default
+    $player_arg = "--player=spotify";
+}
+
+
 
 if ($ENV{'BLOCK_BUTTON'} == 1) {
     system("playerctl $player_arg previous");
