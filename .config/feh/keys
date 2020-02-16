@@ -1,0 +1,4 @@
+#vim like forward
+
+next_img l
+prev_img h
