@@ -29,4 +29,6 @@ alias o='xdg-open'
 alias v='vim'
 
 # quality of life
-alias pingd="ping $(ip route | awk '/^default via/ { print $3 ; exit }')" # ping the default gateway
+pingd () {
+  ping $(ip route | awk '/^default via/ { print $3 ; exit }') # ping the default gateway
+}
