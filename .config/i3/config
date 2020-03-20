@@ -21,7 +21,7 @@ set $script_path /home/leo/scripts/i3
 set $term alacritty
 
 # colors
-set $bg-color 	         #4f949f
+set $bg-color 	         #5294E2
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -37,7 +37,7 @@ set $mov_right l
 # names for the workspaces
 set $workspace1 "1 "
 set $workspace2 "2 "
-set $workspace3 "3 "
+set $workspace3 "3 "
 set $workspace4 4
 set $workspace5 "5 "
 set $workspace6 6
@@ -136,6 +136,7 @@ assign [class="Zathura"] $workspace5
 assign [class="TelegramDesktop"] $workspace9
 assign [class="discord"] $workspace9
 assign [class="Riot"] $workspace9
+assign [class="Slack"] $workspace9
 for_window [class="Spotify"] move to workspace $workspace10
 
 
