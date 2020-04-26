@@ -14,8 +14,8 @@
 
 # mod Key: Windows
 set $mod Mod4
-# sup Key to start programs: Alt
-set $sup Mod1 
+# alt Key to start programs: Alt
+set $alt Mod1
 
 set $script_path /home/leo/scripts/i3
 set $term alacritty
@@ -191,6 +191,7 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+	bindsym q mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -285,22 +286,24 @@ mode  "$mode_player" {
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
         bindsym Escape mode "default"
+	bindsym q mode "default"
 }
 bindsym $mod+m mode "$mode_player"
 
 # mode to control logout, shutdown ...
 set $mode_system System | [l] lock | [e] logout | [s] suspend | [h] hibernate | [r] reboot | [Shift+s] shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default" 
-    bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
-    bindsym s exec --no-startup-id $script_path/i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id $script_path/i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id $script_path/i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $script_path/i3exit shutdown, mode "default"
+	bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default" 
+	bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
+	bindsym s exec --no-startup-id $script_path/i3exit suspend, mode "default"
+	bindsym h exec --no-startup-id $script_path/i3exit hibernate, mode "default"
+	bindsym r exec --no-startup-id $script_path/i3exit reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id $script_path/i3exit shutdown, mode "default"
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym q mode "default"
 }
 bindsym $mod+i mode "$mode_system"
 bindsym $mod+Shift+x exec $script_path/i3exit lock
@@ -316,8 +319,9 @@ mode "$mode_vpn" {
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
         bindsym Escape mode "default"
+	bindsym q mode "default"
 }
-bindsym $sup+v mode "$mode_vpn"
+bindsym $alt+v mode "$mode_vpn"
 
 # take a screenshot and save file
 bindsym --release Print exec --no-startup-id $script_path/screenshot
@@ -327,12 +331,12 @@ bindsym $mod+Print exec --no-startup-id $script_path/screenshot all
 # # # # # # # # # #
 
 # start programs with keybinding
-bindsym $sup+f exec firefox
-bindsym $sup+s exec spotify
-bindsym $sup+t exec thunderbird
-bindsym $sup+c exec --no-startup-id telegram-desktop
-bindsym $sup+r exec $term -e ranger
-bindsym $sup+h exec $term -e htop
+bindsym $alt+f exec firefox
+bindsym $alt+s exec spotify
+bindsym $alt+t exec thunderbird
+bindsym $alt+c exec --no-startup-id telegram-desktop
+bindsym $alt+r exec $term -e ranger
+bindsym $alt+h exec $term -e htop
 
 exec $term
 exec firefox
