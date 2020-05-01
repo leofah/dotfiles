@@ -16,8 +16,8 @@ case "$1" in
 		exit $?
 		;;
 	tum)
-		# look at the ciscovpn status
-		ciscovpn state | grep "state: Connected"
+		# check if pid file of openconnect is present
+		test -e $HOME/.config/vpn/tumpid
 		exit $?
 		;;
 	*)

@@ -18,11 +18,11 @@ case "$2" in
 	case "$1" in
 	    $connect)
 		# connect to tum
-		ciscovpn -s < $config_path/tum
+		openconnect --config $config_path/tum asa-cluster.lrz.de < $config_path/tumpwd
 		;;
 	    $disconnect)
 		# disconnect to tum
-		ciscovpn disconnect
+		kill -2 $(cat $config_path/tumpid)
 		;;
 	    *)
         	echo $usage
@@ -33,11 +33,11 @@ case "$2" in
     $stusta)
 	case "$1" in
 	    $connect)
-		sudo $vpn_stusta connect
+		$vpn_stusta connect
 		exit $?
 		;;
 	    $disconnect)
-		sudo $vpn_stusta disconnect
+		$vpn_stusta disconnect
 		exit $?
 		;;
 	    *)
