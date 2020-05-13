@@ -345,7 +345,9 @@ exec firefox
 exec --no-startup-id nm-applet
 exec --no-startup-id xss-lock $script_path/i3exit lock
 exec --no-startup-id numlockx on
+exec --no-startup-id nextcloud
 
 # Wallpaper, composite manager
 exec --no-startup-id $script_path/slideWallpaper
 exec --no-startup-id picom
+exec --no-startup-id redshift
