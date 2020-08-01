@@ -1,0 +1,178 @@
+colors:
+  black:  '0x000000'
+  grey:   '0x333333'
+  white:  '0xffffff'
+  red:    '0xff0000'
+  green:  '0x00ff00'
+  blue:   '0x0000ff'
+  aqua:   '0x00ffff'
+  yellow: '0xffff00'
+  orange: '0xff7700'
+  pink:   '0xff00ff'
+  purple: '0x440044'
+
+keys:
+  function: f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12
+  numbers: 1,2,3,4,5,6,7,8,9,0
+  complete_number_block: numbers_block, num_lock, p_divide, p_multiply, p_subtract,
+    p_add, p_enter, p_delete
+  numbers_block: p_home, p_up, p_page_up, p_left, p_begin, p_right, p_end, p_down,
+    p_next, p_insert
+  no_write: tab, caps_lock, shift_l, less, control_l, super_l, alt_l, [65027], fn, menu, control_r, shift_r, return, backspace, [65105], [65106],
+    plus, numbersign
+  i3_command: super_l
+  i3_commands: i3_command, alt_l
+  arrows: up, left, down, right
+  exit_mode: nothing+escape, nothing+return, nothing+q
+  exit_keys: escape, return, q
+  monitor: p, s, d, e, m, e
+  i3_move: h, j, k, l, arrows
+
+modes:
+  default:
+    scheme: default
+    super_l+shift_l: i3/mod+shift
+    alt_l: i3/alt
+    i3_command: i3/mod
+    switch_mode:
+      nothing + super_l + r: resize
+      nothing + super_l + p: monitor
+      nothing + super_l + w: wallpaper
+      nothing + super_l + m: player
+      nothing + super_l + i: system
+      nothing + alt_l + v: vpn
+      nothing + control_l + control_r: effect
+
+
+  resize:
+    scheme: resize
+    switch_mode:
+      exit_mode: default
+
+  monitor:
+    scheme: monitor
+    switch_mode:
+      exit_mode: default
+      monitor: default
+
+  wallpaper:
+    scheme: wallpaper
+    switch_mode:
+      exit_mode: default
+
+  player:
+    scheme: player
+    switch_mode:
+      exit_mode: default
+      p: default
+
+  system:
+    scheme: system1
+    shift_l: system2
+    switch_mode:
+      exit_mode: default
+      l, e, s, h, r, shift_l+s: default
+
+  vpn:
+    scheme: vpn
+    shift_l: vpn2
+    switch_mode:
+      exit_mode: default
+      t, shift_l+t, s, shift_l+s: default
+
+  effect:
+    scheme: effect
+    switch_mode:
+      escape: default
+
+color_schemes:
+  default:
+    all: blue
+    arrows: red
+    complete_number_block: green
+    numbers_block: yellow
+    no_write: yellow
+    i3_commands: pink
+    escape: orange
+    function: green
+
+  effect:
+    type: starlight
+    color1: green
+    color2: blue
+    time: slow
+
+  i3/mod-base:
+    all: grey
+    i3_move: green
+    numbers: blue
+    super_l, shift_l: pink
+
+  i3/mod:
+    inherit: i3/mod-base
+    space, a, less: green # switch focus
+    d, return: blue # start programs
+    e, s, t, f: orange # change layout
+    i: purple # special mode
+    m, w, r, p, print: yellow # modes / custom commands
+    p_multiply, p_subtract, p_add: aqua # sound control
+    v, n: aqua # change vertical / horizontal
+
+  i3/mod+shift:
+    inherit: i3/mod-base
+    p, less, space: green
+    c, r: pink 
+    q: red
+    x: red
+
+  i3/alt:
+    all: grey
+    c, f, t, s: green
+    r, h: blue
+    v: yellow
+    alt_l: pink
+
+  i3/modes:
+    all: grey
+    exit_keys: aqua
+
+  player:
+    inherit: i3/modes
+    m, n: blue
+    p: pink
+
+  resize:
+    inherit: i3/modes
+    i3_move: green
+
+  monitor:
+    inherit: i3/modes
+    monitor: blue
+    w: yellow
+
+  wallpaper:
+    inherit: i3/modes
+    w: yellow
+    d: red
+
+  system1:
+    inherit: i3/modes
+    e: orange
+    s, h: yellow
+    r: red
+    shift_l: purple
+
+  system2:
+    all: grey
+    shift_l: pink
+    s: red
+
+  vpn:
+    inherit: i3/modes
+    s, t: green
+    shift_l: purple
+
+  vpn2:
+    all: grey
+    s, t: yellow
+    shift_l: pink

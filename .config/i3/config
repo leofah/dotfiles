@@ -70,6 +70,7 @@ bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
+bindsym $alt+F4 kill
 
 # start program launcher rofi
 bindsym $mod+d exec rofi -show run -config ~/.config/rofi/rofi.conf
@@ -135,7 +136,7 @@ assign [class="Thunderbird"] $workspace3
 assign [class="Zathura"] $workspace5
 assign [class="TelegramDesktop"] $workspace9
 assign [class="discord"] $workspace9
-assign [class="Riot"] $workspace9
+assign [class="Element"] $workspace9
 assign [class="Slack"] $workspace9
 for_window [class="Spotify"] move to workspace $workspace10
 
@@ -351,3 +352,4 @@ exec --no-startup-id nextcloud
 exec --no-startup-id $script_path/slideWallpaper
 exec --no-startup-id picom
 exec --no-startup-id redshift
+exec --no-startup-id ~/.local/bin/i3razer --config $HOME/.config/razer/config.yml

@@ -25,9 +25,6 @@ alias ip='ip --color=auto'
 alias pip-update='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 
 
-# Paths
-alias 7sem='cd ~/Documents/Studium/7.Semester'
-
 # run alias commands with sudo
 alias sudo='sudo '
 
@@ -40,6 +37,11 @@ pingd () {
 }
 
 # SSN
-alias ssn='cd ~/SSN/'
 alias age-knecht='echo "https://www.youtube.com/watch?v=jadxTFqyhRM" | nc knecht.stusta.de 60601'
+alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 
+function ala-ssh {
+    cat /usr/share/terminfo/a/alacritty | ssh $@ sh -c "'mkdir -p .terminfo/a/ && cat > .terminfo/a/alacritty'"
+    ssh $@
+}
+compdef ala-ssh=ssh 2> /dev/null
