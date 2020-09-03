@@ -39,9 +39,12 @@ pingd () {
 # SSN
 alias age-knecht='echo "https://www.youtube.com/watch?v=jadxTFqyhRM" | nc knecht.stusta.de 60601'
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
+alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
 
-function ala-ssh {
+
+function copy-ssh {
     cat /usr/share/terminfo/a/alacritty | ssh $@ sh -c "'mkdir -p .terminfo/a/ && cat > .terminfo/a/alacritty'"
+    cat $HOME/.zshrc_server | ssh $@ sh -c "'cat > .zshrc'"
     ssh $@
 }
-compdef ala-ssh=ssh 2> /dev/null
+compdef copy-ssh=ssh 2> /dev/null

@@ -7,6 +7,6 @@ fehgb=~/.fehbg
 # the current wallpaper stands in ~/.fehbg 
 # ! There should be no spaces in the path
 
-CURRENT_WALL=$(awk '/^feh/ {print $3}' $fehgb | sed 's/'\''//g')
+CURRENT_WALL=$(awk '/^feh/ {print $4}' $fehgb | sed 's/'\''//g')
 mv $CURRENT_WALL $wallpapers/.deleted/
 

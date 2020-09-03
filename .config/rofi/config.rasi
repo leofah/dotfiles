@@ -1,0 +1,16 @@
+configuration {
+    color-enabled: true;
+    color-window: "#bf0A161B, #bf0A161B, #00000000";
+    color-normal: "#00000000, #d6e7f3, #00000000, #1287BC, #0A161B";
+    color-active: "#00000000, #d6e7f3, #00000000, #1287BC, #0A161B";
+    color-urgent: "#00000000, #d6e7f3, #00000000, #1287BC, #0A161B";
+
+    lines: 3;
+    eh: 2;
+    width: 100;
+    padding: 250;
+    fullscreen: true;
+    bw: 0;
+    hide-scrollbar: true;
+    font: "Noto Sans 18";
+}
