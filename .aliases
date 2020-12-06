@@ -48,3 +48,8 @@ function copy-ssh {
     ssh $@
 }
 compdef copy-ssh=ssh 2> /dev/null
+
+# scan
+alias scan='utsushi scan --no-interface --image-format=PDF --resolution=600 >'
+alias scan_duplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --duplex --doc-source=ADF >'
+alias scan_simplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --doc-source=ADF >'

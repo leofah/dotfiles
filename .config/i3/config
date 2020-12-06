@@ -67,7 +67,7 @@ bindsym $alt+F4 kill
 
 # start program launcher rofi
 bindsym $mod+d exec rofi -show run
-bindsym $mod+s exec rofi -show ssh -terminal $term
+bindsym $mod+s exec $script_path/ssh-launcher 
 
 # change focus
 bindsym $mod+$mov_left focus left
@@ -204,7 +204,7 @@ for_window [class=".*"] border pixel 2
 # finds out, if available)
 bar {
 	position top
-	font pango:Ubuntu Nerd Font 8
+	font pango:Hack Nerd Font 8
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 	tray_output primary
 	colors {
