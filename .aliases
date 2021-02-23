@@ -20,6 +20,7 @@ alias gch='git checkout'
 # Dotfiles handling
 alias dots='/usr/bin/git --git-dir=$HOME/.dots.git --work-tree=$HOME'
 alias dots-ls='dots ls-files'
+compdef dots="git --git-dir=$HOME/.dots.git/ --work-tree=$HOME" 2> /dev/null
 
 alias ip='ip --color=auto'
 alias pip-update='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
@@ -29,7 +30,8 @@ alias pip-update='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d 
 alias sudo='sudo '
 
 alias o='rifle' # rangers file opener
-alias v='vim'
+alias v='nvim'
+alias vi='nvim'
 
 # quality of life
 pingd () {
@@ -37,7 +39,7 @@ pingd () {
 }
 
 # SSN
-alias age-knecht='echo "https://www.youtube.com/watch?v=jadxTFqyhRM" | nc knecht.stusta.de 60601'
+alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knecht.stusta.de 60601'
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
 
@@ -53,3 +55,6 @@ compdef copy-ssh=ssh 2> /dev/null
 alias scan='utsushi scan --no-interface --image-format=PDF --resolution=600 >'
 alias scan_duplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --duplex --doc-source=ADF >'
 alias scan_simplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --doc-source=ADF >'
+
+alias pypy='pypy3'
+alias sft-ran-vpn='pushd /home/leo/.config/vpn/sft.ran/; sudo openvpn --daemon --config sftnet.ovpn; popd'

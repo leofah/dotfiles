@@ -99,6 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.aliases
 
+source /usr/share/fzf/completion.zsh
+source /usr/share/fzf/key-bindings.zsh
+
+bindkey '^H' backward-kill-word
+
 # ssh agent setup
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
         ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"

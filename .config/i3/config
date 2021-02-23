@@ -63,10 +63,9 @@ bindsym $mod+Return exec $term
 
 # kill focused window
 bindsym $mod+Shift+q kill
-bindsym $alt+F4 kill
 
 # start program launcher rofi
-bindsym $mod+d exec rofi -show run
+bindsym $mod+d exec rofi -show drun -show-icons
 bindsym $mod+s exec $script_path/ssh-launcher 
 
 # change focus
@@ -240,11 +239,11 @@ bindsym $mod+Shift+p move workspace to output right
 
 set $mode_monitor Monitor Setting | [p]rimary | [s]econdary | [d]uplicate | [m]irror | [e]xtend | [w]allpaper
 mode  "$mode_monitor" {
-	bindsym p exec --no-startup-id mons -o, exec --no-startup-id $script_path/setWallpaper, mode "default"
-	bindsym s exec --no-startup-id mons -s, exec --no-startup-id $script_path/setWallpaper, mode "default"
-	bindsym d exec --no-startup-id mons -d, exec --no-startup-id $script_path/setWallpaper, mode "default"
-	bindsym m exec --no-startup-id mons -m, exec --no-startup-id $script_path/setWallpaper, mode "default"
-	bindsym e exec --no-startup-id mons -e right, exec --no-startup-id $script_path/setWallpaper, mode "default"
+	bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper
+	bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper
+	bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper
+	bindsym m exec --no-startup-id mons -m, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper
+	bindsym e exec --no-startup-id mons -e right, mode "default", exec --no-startup-id $script_path/setWallpaper
 
 	bindsym w exec --no-startup-id $script_path/setWallpaper
 
@@ -335,6 +334,9 @@ bindsym $alt+h exec $term -e htop
 
 exec $term
 exec firefox
+exec element-desktop
+exec telegram-desktop
+exec thunderbird
 
 # background startup
 exec --no-startup-id nm-applet
