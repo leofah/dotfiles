@@ -64,7 +64,7 @@ modes:
     scheme: player
     switch_mode:
       exit_mode: default
-      p: default
+      h, l, p: default
 
   system:
     scheme: system1
@@ -139,6 +139,7 @@ color_schemes:
   player:
     inherit: i3/modes
     m, n: blue
+    h, l: red
     p: pink
 
   resize:

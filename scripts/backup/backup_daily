@@ -3,7 +3,7 @@
 # local-mode, tossh-mode, fromssh-mode
 
 LOG=$0.log
-SOURCES=(/etc /boot /home/leo/.config /var/spool/cron/crontabs /root )
+SOURCES=(/etc /boot /home/leo/.config /var/spool/cron/crontabs /root /usr/share)
 EXCLUDE=(.cache .thumbnails Trash) # space should be escaped properly
 TARGET="/backup_daily"
 

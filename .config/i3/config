@@ -277,6 +277,12 @@ mode  "$mode_player" {
 	bindsym n exec --no-startup-id playerctl --player='spotify' previous
 	bindsym Left exec --no-startup-id playerctl --player='spotify' previous
 
+    # select output
+    bindsym l exec --no-startup-id pactl set-sink-port 0 analog-output-lineout, mode "default
+
+    bindsym h exec --no-startup-id pactl set-sink-port 0 analog-output-headphones, mode "defa
+ult"
+
         # back to normal: Enter or Escape
 	bindsym Return mode "default"
         bindsym Escape mode "default"
