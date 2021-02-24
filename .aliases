@@ -32,6 +32,7 @@ alias sudo='sudo '
 alias o='rifle' # rangers file opener
 alias v='nvim'
 alias vi='nvim'
+alias vim='nvim'
 
 # quality of life
 pingd () {
