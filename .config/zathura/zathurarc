@@ -5,5 +5,5 @@ set smooth-scroll true
 set scroll-page-aware true
 
 # Keybindings
-map <Right> scroll full-down
-map <Left> scroll full-up
+map <Right> navigate next
+map <Left> navigate previous

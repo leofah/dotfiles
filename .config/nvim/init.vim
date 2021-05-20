@@ -16,7 +16,7 @@ set nowrap " dont't wrap lines
 " search
 set ignorecase
 set smartcase " ignore case only if no capital character searched
-set nohlsearch
+set hlsearch
 set incsearch
 
 set scrolloff=8

@@ -44,15 +44,7 @@ alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knech
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
 
-
-function copy-ssh {
-    cat /usr/share/terminfo/a/alacritty | ssh $@ sh -c "'mkdir -p .terminfo/a/ && cat > .terminfo/a/alacritty'"
-    cat $HOME/.zshrc_server | ssh $@ sh -c "'cat > .zshrc'"
-    ssh $@
-}
-compdef copy-ssh=ssh 2> /dev/null
-
-# scan
+# scan pdf
 alias scan='utsushi scan --no-interface --image-format=PDF --resolution=600 >'
 alias scan_duplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --duplex --doc-source=ADF >'
 alias scan_simplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --doc-source=ADF >'
