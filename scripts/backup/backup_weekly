@@ -17,7 +17,7 @@ LISTPACKAGES=listdebianpackages        # local-mode and tossh-mode
 
 EXCLUDECONF=$(for i in ${EXCLUDE[@]}; do echo --exclude=$i; done)
 RSYNCCONF=(--delete-after --delete -h $EXCLUDECONF)
-MOUNTPOINT="/run/media/leo/BackUp_Ubuntu"               # check local mountpoint
+MOUNTPOINT="/mnt"
 MAILREC="backup@localhost.com"
 
 TARGET="$MOUNTPOINT/rsync_auto"
