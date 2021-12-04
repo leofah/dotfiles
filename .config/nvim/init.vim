@@ -1,5 +1,6 @@
 syntax on
-set guicursor=
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
 set relativenumber
 set number
 

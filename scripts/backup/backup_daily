@@ -4,7 +4,7 @@
 
 LOG=/home/leo/scripts/backup/backup_daily.log
 SOURCES=(/etc /boot /home/leo/.config /var/spool/cron/crontabs /root /usr/share)
-EXCLUDE=(.cache .thumbnails Trash) # space should be escaped properly
+EXCLUDE=(.cache .thumbnails Trash fonts texmf-dist) # space should be escaped properly
 TARGET="/backup_daily"
 
 # edit or comment with "#"

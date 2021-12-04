@@ -44,12 +44,12 @@ pingd () {
 alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knecht.stusta.de 60601'
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
-alias server-knecht='echo "https://www.youtube.com/watch?v=RzJf02TIqxkh" | nc knecht.stusta.de 60601'
+alias server-knecht='echo "https://daten.stusta.de/files/013253/PURE_RELAXATION-SERVER_SOUNDSbyHetzner.mp4" | nc knecht.stusta.de 60601'
 
 # scan pdf
-alias scan='utsushi scan --no-interface --image-format=PDF --resolution=600 >'
-alias scan_duplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --duplex --doc-source=ADF >'
-alias scan_simplex='utsushi scan --no-interface --image-format=PDF --resolution=600 --doc-source=ADF >'
+alias scan='utsushi scan --no-interface --image-format=PDF --resolution=200 --scan-area ISO/A4/Portrait'
+alias scan_duplex='scan --duplex --doc-source=ADF'
+alias scan_simplex='scan --doc-source=ADF'
 
 alias pypy='pypy3'
 alias sft-ran-vpn='pushd /home/leo/.config/vpn/sft.ran/; sudo openvpn --daemon --config sftnet.ovpn; popd'
