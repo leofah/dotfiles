@@ -1,6 +1,4 @@
 syntax on
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
 set relativenumber
 set number
 
@@ -12,11 +10,11 @@ set expandtab
 set smartindent
 
 
-set nowrap " dont't wrap lines
+set nowrap
 
 " search
 set ignorecase
-set smartcase " ignore case only if no capital character searched
+set smartcase
 set hlsearch
 set incsearch
 
