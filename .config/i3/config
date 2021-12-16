@@ -66,7 +66,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher rofi
 bindsym $mod+d exec rofi -show drun -show-icons
-bindsym $mod+s exec $script_path/ssh-launcher 
+bindsym $mod+s exec $script_path/ssh-launcher
 
 # change focus
 bindsym $mod+$mov_left focus left
@@ -124,9 +124,9 @@ bindsym $mod+a focus parent
 
 # windows on specific workspaces
 assign [class="firefox"] $workspace2
-assign [class="Steam"] $workspace8
 assign [class="Thunderbird"] $workspace3
 assign [class="Zathura"] $workspace5
+assign [class="Steam"] $workspace8
 assign [class="TelegramDesktop"] $workspace9
 assign [class="discord"] $workspace9
 assign [class="Element"] $workspace9

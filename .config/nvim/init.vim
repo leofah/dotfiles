@@ -1,10 +1,14 @@
-syntax on
+"
+" Leo's vimrc
+"
+" (c) 2021 Leo Fahrbach
 
 
 " ==============================
 "           General
 " ==============================
 
+syntax on
 set relativenumber
 set number
 set tabstop=4
@@ -21,6 +25,9 @@ set listchars=tab:\|->,trail:·
 set nowrap
 set scrolloff=8
 set sidescrolloff=8
+"set mouse=a
+set endofline
+
 
 " ==============================
 "           KeyMaps
@@ -28,8 +35,9 @@ set sidescrolloff=8
 
 let mapleader = "\<space>"
 
-nmap <leader>ve :edit ~/.config/nvim/init.vim<cr>
-nmap <leader>vr :source ~/.config/nvim/init.vim<cr>
+nmap <leader>ve :edit $MYVIMRC<cr>
+nmap <leader>vr :source $MYVIMRC<cr>
+"autocmd BufWritePost $MYVIMRC source %
 
 nmap <leader>h :nohlsearch<cr>
 
@@ -42,6 +50,15 @@ nmap <leader>x :!rifle %<cr><cr>
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" use w!! to save files with sudo
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" control-backspace and control-delete for backward and forward word removal
+imap <C-BS> <C-w>
+noremap! <C-BS> <C-w>
+noremap! <C-h> <C-w>
+
 
 " ==============================
 "       Plugin loading

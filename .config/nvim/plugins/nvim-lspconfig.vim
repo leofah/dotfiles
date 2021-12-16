@@ -55,5 +55,5 @@ endfunction
 
 augroup LspconfigSetup
     autocmd!
-    autocmd User Plugloaded call LspconfigSetup()
+    autocmd User PlugLoaded call LspconfigSetup()
 augroup end
