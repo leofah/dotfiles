@@ -2,7 +2,7 @@
 # locking after suspend is handeld by xss-lock
 case "$1" in
     lock)
-	/home/leo/scripts/i3/lock_mons
+    /home/leo/scripts/i3/lock_mons.sh
         ;;
     logout)
         i3-msg exit

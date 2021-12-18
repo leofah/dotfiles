@@ -1,7 +1,7 @@
 #!/bin/sh
 
-testc=$HOME/scripts/i3/vpn_info
-activate=sudo\ $HOME/scripts/i3/vpn
+testc=$HOME/scripts/i3/vpn_info.sh
+activate=sudo\ $HOME/scripts/i3/vpn.sh
 up=
 down=
 case "$BLOCK_INSTANCE" in

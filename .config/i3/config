@@ -66,7 +66,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher rofi
 bindsym $mod+d exec rofi -show drun -show-icons
-bindsym $mod+s exec $script_path/ssh-launcher
+bindsym $mod+s exec $script_path/ssh-launcher.sh
 
 # change focus
 bindsym $mod+$mov_left focus left
@@ -165,7 +165,7 @@ bindsym $mod+Shift+r restart
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
     # Pressing left will shrink the window’s width.
     # Pressing right will grow the window’s width.
@@ -229,8 +229,8 @@ bindsym $mod+KP_Subtract exec --no-startup-id pactl set-sink-volume @DEFAULT_SIN
 bindsym $mod+KP_Multiply exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # decrease sound volume
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id $script_path/brightness inc # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness dec # decrease screen brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id $script_path/brightness.sh inc # increase screen brightness
+bindsym XF86MonBrightnessDown exec --no-startup-id $script_path/brightness.sh dec # decrease screen brightness
 bindsym $mod+XF86MonBrightnessUp exec --no-startup-id light -S 100 # highest brightness
 bindsym $mod+XF86MonBrightnessDown exec --no-startup-id light -S 1 # lowest brightness
 
@@ -239,13 +239,13 @@ bindsym $mod+Shift+p move workspace to output right
 
 set $mode_monitor Monitor Setting | [p]rimary | [s]econdary | [d]uplicate | [m]irror | [e]xtend | [w]allpaper
 mode  "$mode_monitor" {
-    bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper && xset r rate 200 80
-    bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper && xset r rate 200 80
-    bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper && xset r rate 200 80
-    bindsym m exec --no-startup-id mons -m, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper && xset r rate 200 80
-    bindsym e exec --no-startup-id mons -e right, mode "default", exec --no-startup-id $script_path/setWallpaper && xset r rate 200 80
+    bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
+    bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
+    bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
+    bindsym m exec --no-startup-id mons -m, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
+    bindsym e exec --no-startup-id mons -e right, mode "default", exec --no-startup-id $script_path/setWallpaper.sh && xset r rate 200 80
 
-    bindsym w exec --no-startup-id $script_path/setWallpaper
+    bindsym w exec --no-startup-id $script_path/setWallpaper.sh
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -257,8 +257,8 @@ bindsym $mod+p mode "$mode_monitor"
 # Wallpaper mode to set and delete a wallpaper
 set $mode_wallpaper Wallpaper | [w] set | [d]elete
 mode  "$mode_wallpaper" {
-    bindsym w exec --no-startup-id $script_path/setWallpaper
-    bindsym d exec --no-startup-id $script_path/deleteWallpaper, exec --no-startup-id $script_path/setWallpaper
+    bindsym w exec --no-startup-id $script_path/setWallpaper.sh
+    bindsym d exec --no-startup-id $script_path/deleteWallpaper.sh, exec --no-startup-id $script_path/setWallpaper.sh
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -291,12 +291,12 @@ bindsym $mod+m mode "$mode_player"
 # mode to control logout, shutdown ...
 set $mode_system System | [l] lock | [e] logout | [s] suspend | [h] hibernate | [r] reboot | [Shift+s] shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $script_path/i3exit lock, mode "default" 
-    bindsym e exec --no-startup-id $script_path/i3exit logout, mode "default"
-    bindsym s exec --no-startup-id $script_path/i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id $script_path/i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id $script_path/i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id $script_path/i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id $script_path/i3exit.sh lock, mode "default"
+    bindsym e exec --no-startup-id $script_path/i3exit.sh logout, mode "default"
+    bindsym s exec --no-startup-id $script_path/i3exit.sh suspend, mode "default"
+    bindsym h exec --no-startup-id $script_path/i3exit.sh hibernate, mode "default"
+    bindsym r exec --no-startup-id $script_path/i3exit.sh reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id $script_path/i3exit.sh shutdown, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -304,15 +304,16 @@ mode "$mode_system" {
     bindsym q mode "default"
 }
 bindsym $mod+i mode "$mode_system"
-bindsym $mod+Shift+x exec $script_path/i3exit lock
+bindsym $mod+Shift+x exec $script_path/lock_mons.sh
+
 
 set $mode_vpn VPN [] connect, [Shift] disconnect; [+t] tum, [+s] stusta
 mode "$mode_vpn" {
-    bindsym t exec --no-startup-id sudo $script_path/vpn connect tum, mode "default"
-    bindsym Shift+t exec --no-startup-id sudo $script_path/vpn disconnect tum, mode "default"
+    bindsym t exec --no-startup-id sudo $script_path/vpn.sh connect tum, mode "default"
+    bindsym Shift+t exec --no-startup-id sudo $script_path/vpn.sh disconnect tum, mode "default"
 
-    bindsym s exec --no-startup-id sudo $script_path/vpn connect stusta, mode "default"
-    bindsym Shift+s exec --no-startup-id sudo $script_path/vpn disconnect stusta, mode "default"
+    bindsym s exec --no-startup-id sudo $script_path/vpn.sh connect stusta, mode "default"
+    bindsym Shift+s exec --no-startup-id sudo $script_path/vpn.sh disconnect stusta, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -322,8 +323,8 @@ mode "$mode_vpn" {
 bindsym $alt+v mode "$mode_vpn"
 
 # take a screenshot and save file
-bindsym --release Print exec --no-startup-id $script_path/screenshot
-bindsym $mod+Print exec --no-startup-id $script_path/screenshot all
+bindsym --release Print exec --no-startup-id $script_path/screenshot.sh
+bindsym $mod+Print exec --no-startup-id $script_path/screenshot.sh all
 
 # startup
 # # # # # # # # # #
@@ -344,13 +345,13 @@ exec thunderbird
 
 # background startup
 exec --no-startup-id nm-applet
-exec --no-startup-id xss-lock $script_path/i3exit lock
+exec --no-startup-id xss-lock $script_path/i3exit.sh lock
 exec --no-startup-id xset r rate 200 80
 exec --no-startup-id numlockx on
 exec --no-startup-id nextcloud
 
 # Wallpaper, composite manager
-exec --no-startup-id $script_path/slideWallpaper
+exec --no-startup-id $script_path/slideWallpaper.sh
 exec --no-startup-id picom
 exec --no-startup-id redshift -l 48.1:11.6
 exec --no-startup-id ~/.local/bin/i3razer --config $HOME/.config/razer/config.yml
