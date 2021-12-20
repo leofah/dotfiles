@@ -18,7 +18,7 @@ set $mod Mod4
 set $alt Mod1
 
 set $script_path /home/leo/scripts/i3
-set $term alacritty
+set $term `${TERMINAL=/usr/bin/alacritty}`
 
 # colors
 set $bg-color            #5294E2
@@ -304,6 +304,7 @@ mode "$mode_system" {
     bindsym q mode "default"
 }
 bindsym $mod+i mode "$mode_system"
+bindsym $mod+Shift+i exec $script_path/powermenu.sh
 bindsym $mod+Shift+x exec $script_path/lock_mons.sh
 
 
@@ -325,6 +326,8 @@ bindsym $alt+v mode "$mode_vpn"
 # take a screenshot and save file
 bindsym --release Print exec --no-startup-id $script_path/screenshot.sh
 bindsym $mod+Print exec --no-startup-id $script_path/screenshot.sh all
+
+bindsym $mod+c exec $script_path/edit_config.sh
 
 # startup
 # # # # # # # # # #

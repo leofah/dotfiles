@@ -114,14 +114,14 @@ color_schemes:
     d, return: blue # start programs
     e, s, t, f: orange # change layout
     i: purple # special mode
-    m, w, r, p, print: yellow # modes / custom commands
+    m, w, r, p, c, print: yellow # modes / custom commands
     p_multiply, p_subtract, p_add: aqua # sound control
     v, n: aqua # change vertical / horizontal
 
   i3/mod+shift:
     inherit: i3/mod-base
     p, less, space: green
-    c, r: pink 
+    c, r, i: pink 
     q: red
     x: red
 
