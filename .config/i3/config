@@ -18,7 +18,7 @@ set $mod Mod4
 set $alt Mod1
 
 set $script_path /home/leo/scripts/i3
-set $term `${TERMINAL=/usr/bin/alacritty}`
+set $term ${TERMINAL=/usr/bin/alacritty}
 
 # colors
 set $bg-color            #5294E2
