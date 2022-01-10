@@ -51,8 +51,8 @@ nmap <leader>x :!rifle %<cr><cr>
 vnoremap < <gv
 vnoremap > >gv
 
-" use w!! to save files with sudo
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+" use w!! to save files with sudo does not work in nvim
+"cnoremap w!! execute 'silent write !sudo tee % >/dev/null' <bar> edit!
 
 " control-backspace and control-delete for backward and forward word removal
 imap <C-BS> <C-w>

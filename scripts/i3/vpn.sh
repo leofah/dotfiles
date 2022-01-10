@@ -10,42 +10,25 @@ stusta=stusta
 connect=connect
 disconnect=disconnect
 usage="Usage: $0 {$connect|$disconnect} {$tum|$stusta}"
+# The config path is hardcoded, as this script is run by root
 config_path=/home/leo/.config/vpn
 wg=wg1-ssn
 
 case "$2" in
     $tum)
     case "$1" in
-        $connect)
-        # connect to tum
-        openconnect --config $config_path/tum asa-cluster.lrz.de < $config_path/tumpwd
-        ;;
-        $disconnect)
-        # disconnect to tum
-        kill -2 $(cat $config_path/tumpid)
-        ;;
-        *)
-            echo $usage
-            exit 2
-        ;;
-    esac
-        ;;
+        $connect) openconnect --config $config_path/tum asa-cluster.lrz.de < $config_path/tumpwd;;
+        $disconnect) kill -s INT $(cat "$config_path/tum.pid");;
+        *) echo $usage
+           exit 2;;
+    esac ;;
     $stusta)
     case "$1" in
-        $connect)
-        wg-quick up $wg
-        exit 0
-        ;;
-        $disconnect)
-        wg-quick down $wg
-        exit 0
-        ;;
-        *)
-            echo $usage
-            exit 2
-        ;;
-    esac
-        ;;
+        $connect) wg-quick up $wg;;
+        $disconnect) wg-quick down $wg;;
+        *) echo $usage
+           exit 2;;
+    esac ;;
     *)
         echo $usage
         exit 2

@@ -18,17 +18,14 @@ case "$1" in
         else
             ping daten.stusta.de -6 -c1 -W3 | grep "64 bytes"
             exit $?
-        fi
-        ;;
+        fi ;;
     tum)
         # check if pid file of openconnect is present
-        test -e $HOME/.config/vpn/tumpid
-        exit $?
-        ;;
+        test -e "/home/leo/.config/vpn/tum.pid"
+        exit $? ;;
     *)
         echo $usage
-        exit 2
-        ;;
+        exit 2 ;;
 esac
 
 
