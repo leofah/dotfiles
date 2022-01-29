@@ -9,6 +9,8 @@
 " ==============================
 
 syntax on
+scriptencoding utf-8
+set encoding=utf-8
 set relativenumber
 set number
 set tabstop=4
@@ -59,6 +61,11 @@ imap <C-BS> <C-w>
 noremap! <C-BS> <C-w>
 noremap! <C-h> <C-w>
 
+" split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " ==============================
 "       Plugin loading
@@ -75,9 +82,12 @@ call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/nvim-lspconfig.vim
+source ~/.config/nvim/plugins/vim-airline.vim
+source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/vim-devicons.vim
 
 call plug#end()
 
-" call back functions to setup plugins after plug#end()
+" callback command to setup plugins after plug#end()
 doautocmd User PlugLoaded
 
