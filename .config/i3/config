@@ -271,11 +271,11 @@ bindsym $mod+w mode "$mode_wallpaper"
 # Media player controls with mode
 set $mode_player Control Music | [P] Play Pause | [N,] Previous | [M,] Next
 mode  "$mode_player" {
-    bindsym p exec --no-startup-id playerctl --player='spotify' play-pause, mode "default"
-    bindsym m exec --no-startup-id playerctl --player='spotify' next
-    bindsym Right exec --no-startup-id playerctl --player='spotify' next
-    bindsym n exec --no-startup-id playerctl --player='spotify' previous
-    bindsym Left exec --no-startup-id playerctl --player='spotify' previous
+    bindsym p     exec --no-startup-id "playerctl --ignore-player=firefox,mpv play-pause", mode "default"
+    bindsym m     exec --no-startup-id "playerctl --ignore-player=firefox,mpv next"
+    bindsym Right exec --no-startup-id "playerctl --ignore-player=firefox,mpv next"
+    bindsym n     exec --no-startup-id "playerctl --ignore-player=firefox,mpv previous"
+    bindsym Left  exec --no-startup-id "playerctl --ignore-player=firefox,mpv previous"
 
     # select output
     bindsym l exec --no-startup-id pactl set-sink-port 0 analog-output-lineout, mode "default"

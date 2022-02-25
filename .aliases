@@ -45,6 +45,10 @@ alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knech
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
 alias server-knecht='echo "https://daten.stusta.de/files/013253/PURE_RELAXATION-SERVER_SOUNDSbyHetzner.mp4" | nc knecht.stusta.de 60601'
+say () {
+    curl --data-urlencode "phrase=$*" https://bot.stusta.de/speak
+}
+
 
 # scan pdf
 alias scan='utsushi scan --no-interface --image-format=PDF --resolution=200 --scan-area ISO/A4/Portrait'
