@@ -17,10 +17,7 @@ alias gl='git log'
 alias gd='git diff'
 alias gch='git checkout'
 
-# Dotfiles handling
-alias dots='/usr/bin/git --git-dir=$HOME/.dots.git --work-tree=$HOME'
-alias dots-ls='dots ls-files'
-compdef dots="git --git-dir=$HOME/.dots.git/ --work-tree=$HOME" 2> /dev/null
+# Dotfiles handling (now with yadm, its just the same, but the aliases are already given)
 
 alias ip='ip --color=auto'
 alias pip-update='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
@@ -36,8 +33,33 @@ alias vim='nvim'
 alias vimdiff='nvim -d'
 
 # quality of life
-pingd () {
-  ping $(ip route | awk '/^default via/ { print $3 ; exit }') # ping the default gateway
+pingd () { # ping the default gateway
+  ping $(ip route | awk '/^default via/ { print $3 ; exit }')
+}
+logdate () { # prepend the current date before each line
+    while IFS= read -r line; do
+        printf '%s %s\n' "$(date +%Y-%m-%d\ %H:%M:%S)" "$line";
+    done
+}
+tryping () {
+    local timeout=1
+    local interval=1
+    local srv="$1"
+    local i=0
+    while true
+    do
+        ping -q -W "$timeout" -c1 "$srv" > /dev/null
+        if [ $? -eq 0 ]
+        then
+            notify-send "$srv is back!"
+            tput bel
+            echo -e "$srv is back!"
+            break
+        fi
+        echo -en "\rtry $i "
+        sleep "$interval"
+        i=$((i + 1))
+    done
 }
 
 # SSN
