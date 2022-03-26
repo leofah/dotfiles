@@ -1,7 +1,7 @@
 "
 " Leo's vimrc
 "
-" (c) 2021 Leo Fahrbach
+" (c) 2021 -2022 Leo Fahrbach
 
 
 " ==============================
@@ -29,6 +29,10 @@ set scrolloff=8
 set sidescrolloff=8
 "set mouse=a
 set endofline
+
+set conceallevel=2
+set concealcursor=nc
+" TODO find and add some nice conceals
 
 
 " ==============================
@@ -67,6 +71,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+nnoremap <leader>b :bnext<cr>
+nnoremap <leader>v :bNext<cr>
+
+
+
+
 " ==============================
 "       Plugin loading
 " ==============================
@@ -80,14 +90,25 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
+source ~/.config/nvim/plugins/colorscheme.vim
 source ~/.config/nvim/plugins/nerdtree.vim
-source ~/.config/nvim/plugins/nvim-lspconfig.vim
-source ~/.config/nvim/plugins/vim-airline.vim
+source ~/.config/nvim/plugins/gitsigns.vim
 source ~/.config/nvim/plugins/fugitive.vim
+source ~/.config/nvim/plugins/telescope.vim
+source ~/.config/nvim/plugins/vim-airline.vim
 source ~/.config/nvim/plugins/vim-devicons.vim
+source ~/.config/nvim/plugins/indentLine.vim
+source ~/.config/nvim/plugins/commentary.vim
+source ~/.config/nvim/plugins/nvim-lspconfig.vim
+
+
+" Plugins I want to look in to
+"source ~/.config/nvim/plugins/python-black.vim
+" neoformat
+" auto pairs
+source ~/.config/nvim/plugins/ycm.vim
 
 call plug#end()
 
 " callback command to setup plugins after plug#end()
 doautocmd User PlugLoaded
-

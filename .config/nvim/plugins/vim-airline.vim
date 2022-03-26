@@ -12,4 +12,3 @@ let g:airline_theme = 'onedark'
 "autocmd VimEnter *
 "  \ let &statusline='%{bufferline#refresh_status()}'
 "    \ .bufferline#get_status_string()
-
