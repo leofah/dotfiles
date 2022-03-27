@@ -27,12 +27,13 @@ set listchars=tab:\|->,trail:·
 set nowrap
 set scrolloff=8
 set sidescrolloff=8
-"set mouse=a
+set mouse=a
 set endofline
-
+set clipboard+=unnamedplus
+set foldmethod=indent
 set conceallevel=2
 set concealcursor=nc
-" TODO find and add some nice conceals
+set completeopt=menu,menuone
 
 
 " ==============================
@@ -90,23 +91,29 @@ endif
 
 call plug#begin(data_dir . '/plugins')
 
-source ~/.config/nvim/plugins/colorscheme.vim
+" File Brower + Git
+source ~/.config/nvim/plugins/telescope.vim
 source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/gitsigns.vim
 source ~/.config/nvim/plugins/fugitive.vim
-source ~/.config/nvim/plugins/telescope.vim
+" Look and Feel
 source ~/.config/nvim/plugins/vim-airline.vim
 source ~/.config/nvim/plugins/vim-devicons.vim
+source ~/.config/nvim/plugins/colorscheme.vim
 source ~/.config/nvim/plugins/indentLine.vim
+" Writing Code
 source ~/.config/nvim/plugins/commentary.vim
-source ~/.config/nvim/plugins/nvim-lspconfig.vim
 
+" source ~/.config/nvim/plugins/nvim-lspconfig.vim
+
+source ~/.config/nvim/plugins/luasnip.vim
+source ~/.config/nvim/plugins/nvim-cmp.vim
+source ~/.config/nvim/plugins/auto-pairs.vim
 
 " Plugins I want to look in to
 "source ~/.config/nvim/plugins/python-black.vim
 " neoformat
-" auto pairs
-source ~/.config/nvim/plugins/ycm.vim
+" source ~/.config/nvim/plugins/ycm.vim
 
 call plug#end()
 
