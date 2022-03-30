@@ -1,6 +1,6 @@
-"
-" Needs luasnip and nvim_lsp
-"
+" completion engine which searches the buffer, path, snipperts and the
+" language server.
+" Uses Luasnip and nvim-lsp if installed
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
@@ -15,7 +15,7 @@ function CMPSetup()
 
 lua <<EOF
   -- Setup nvim-cmp.
-  local cmp = require'cmp'
+  local cmp = require('cmp')
 
 --  local check_backspace = function()
 --    local col = vim.fn.col '.' - 1
