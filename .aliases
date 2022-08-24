@@ -66,6 +66,7 @@ tryping () {
 alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knecht.stusta.de 60601'
 alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
 alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
+alias factorio-knecht='echo "https://daten.stusta.de/files/013253/music/Factorio_CompleteSoundtrack.webm" | nc knecht.stusta.de 60601'
 alias server-knecht='echo "https://daten.stusta.de/files/013253/PURE_RELAXATION-SERVER_SOUNDSbyHetzner.mp4" | nc knecht.stusta.de 60601'
 say () {
     curl --data-urlencode "phrase=$*" https://bot.stusta.de/speak
@@ -79,3 +80,5 @@ alias scan_simplex='scan --doc-source=ADF'
 
 alias pypy='pypy3'
 alias sft-ran-vpn='pushd /home/leo/.config/vpn/sft.ran/; sudo openvpn --daemon --config sftnet.ovpn; popd'
+
+alias gzip='gzip --keep'

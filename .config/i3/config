@@ -106,7 +106,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
+bindsym $mod+x layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -132,6 +132,7 @@ assign [class="discord"] $workspace9
 assign [class="Element"] $workspace9
 assign [class="Slack"] $workspace9
 for_window [class="Spotify"] move to workspace $workspace10
+assign [class="cantata"] $workspace10
 
 
 # switch to workspace
@@ -181,6 +182,16 @@ mode "resize" {
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
     bindsym Right resize grow width 10 px or 10 ppt
+
+    # bindings for fine ajustment
+    bindsym Ctrl+$mov_left resize shrink width 1 px or 1 ppt
+    bindsym Ctrl+$mov_up resize grow height 1 px or 1 ppt
+    bindsym Ctrl+$mov_down resize shrink height 1 px or 1 ppt
+    bindsym Ctrl+$mov_right resize grow width 1 px or 1 ppt
+    bindsym Ctrl+Left resize shrink width 1 px or 1 ppt
+    bindsym Ctrl+Down resize grow height 1 px or 1 ppt
+    bindsym Ctrl+Up resize shrink height 1 px or 1 ppt
+    bindsym Ctrl+Right resize grow width 1 px or 1 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -336,7 +347,7 @@ bindsym $mod+c exec $script_path/edit_config.sh
 bindsym $alt+f exec firefox
 bindsym $alt+s exec spotify
 bindsym $alt+t exec thunderbird
-bindsym $alt+c exec --no-startup-id telegram-desktop
+bindsym $alt+c exec --no-startup-id element-desktop
 bindsym $alt+r exec $term -e ranger
 bindsym $alt+h exec $term -e htop
 
