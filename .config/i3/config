@@ -250,11 +250,11 @@ bindsym $mod+Shift+p move workspace to output right
 
 set $mode_monitor Monitor Setting | [p]rimary | [s]econdary | [d]uplicate | [m]irror | [e]xtend | [w]allpaper
 mode  "$mode_monitor" {
-    bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
-    bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
-    bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
-    bindsym m exec --no-startup-id mons -m, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh && xset r rate 200 80
-    bindsym e exec --no-startup-id mons -e right, mode "default", exec --no-startup-id $script_path/setWallpaper.sh && xset r rate 200 80
+    bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
+    bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
+    bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
+    bindsym m exec --no-startup-id mons -m, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
+    bindsym e exec --no-startup-id mons -e right, mode "default", exec --no-startup-id $script_path/setWallpaper.sh
 
     bindsym w exec --no-startup-id $script_path/setWallpaper.sh
 
@@ -360,7 +360,7 @@ exec thunderbird
 # background startup
 exec --no-startup-id nm-applet
 exec --no-startup-id xss-lock $script_path/lock_mons.sh
-exec --no-startup-id xset r rate 200 80
+exec --no-startup-id xautocfg
 exec --no-startup-id numlockx on
 exec --no-startup-id nextcloud
 
