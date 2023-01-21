@@ -111,3 +111,9 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
         source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
+
+pyrc="$HOME/.pythonrc.py"
+if [[ -r $pyrc ]]; then
+    export PYTHONSTARTUP=$pyrc
+fi
+unset pyrc
