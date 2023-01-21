@@ -20,8 +20,25 @@ alias gch='git checkout'
 # Dotfiles handling (now with yadm, its just the same, but the aliases are already given)
 
 alias ip='ip --color=auto'
+
+# python
+alias python3="python3 -q"
+alias p3='python3'
+alias p2='python2'
+alias py3='p3'
+alias py2='p2'
+alias py='p3'
+alias p='py'
+alias pytrace='python3 -m trace -g -t'
+compdef py=python3 p3=python3 p=python3 p2=python2 py2=python2 pytrace=python3 2>/dev/null
+alias pypy='pypy3'
+alias bpy='bpython'
+alias b='bpy'
 alias pip-update='pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 
+alias dmesg='dmesg -L'
+alias watch='watch -c'
+alias gzip='gzip --keep'
 
 # run alias commands with sudo
 alias sudo='sudo '
@@ -31,6 +48,67 @@ alias v='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias vimdiff='nvim -d'
+
+# emacs
+alias emacsnw='emacs -nw'
+alias emacsopen="emacsclient -n"      # reuse frame
+alias emacsopennew="emacsclient -n -c"  # new frame
+alias emacsterm='emacsclient --tty'   # connect in current tty
+alias emacscc="emacs -batch -no-site-file -f batch-byte-compile"  # compile some elisp file(s)
+alias indentemacs="emacs -batch -l ~/.emacs.d/init.el --eval '(batch-indent)'" # indent given files
+
+
+alias bc='bc -q -l'
+alias grep='grep --color=auto'
+alias rg='rg -S'
+alias ip='ip --color'
+alias ipb='ip --color --brief'
+alias bridge='bridge --color'
+alias ag="ag -S"
+alias more='less'
+alias most='less'
+export LESS="-S -i -R -M --shift 5"
+alias less="less $LESS"
+alias lesse="less $LESS +G"
+alias mkdir='mkdir -p -v'
+alias nano='nano -w -S -F -A'
+alias anon=' unset HISTFILE'
+alias ..='cd ..'
+alias ....='cd ../../'
+alias ......='cd ../../../'
+alias ../../='cd ../../'
+alias ../../../='cd ../../../'
+alias cd..='..'
+alias cmatrix="cmatrix -a -b"
+alias rd="cd $(pwd)"
+alias dd="dd status=progress"
+alias file='file -L'
+alias xseltoclip="xclip -o | xclip -i -selection clipboard; xclip -o"
+alias xcliptosel="xclip -selection clipboard -o | xclip -i; xclip -selection clipboard -o"
+alias cls="echo -en \\\\033c"  # clear screen and scrollback
+alias scrolltop="echo -en '\x1b]720;99999\x07'"       # urxvt special command
+alias scrollbottom="echo -en '\x1b]721;99999\x07'"    # urxvt even more special command
+alias rcp="rsync -aHAXP --append-verify"  # yes, this shadows the real rcp
+compdef rcp=rsync 2> /dev/null
+alias rmirror="rsync --recursive --links --perms --times --timeout 180 --safe-links --delete-after --delay-updates --delete --force"
+compdef rmirror=rsync 2> /dev/null
+alias icat="kitty +kitten icat"
+alias kittyssh="kitty +kitten ssh"
+alias cal='cal -m -w'
+alias confgrep='grep -v -P "^\\s*($|#|;)"'   # good to strip conffile comments
+alias mpvll='mpv --profile=low-latency --untimed'
+
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ls='ls --color=tty'
+alias ll='ls -lh'
+alias lsa='ls -lah'
+alias lr='ls -R'                    # recursive ls
+alias lx='ll -BX'                   # sort by extension
+alias lz='ll -rS'                   # sort by size
+alias lt='ll -rt'                   # sort by date
+alias lZ='ll -Z'                    # selinux
+alias lrandom="ls | sort -R | head -n 1"
 
 # quality of life
 pingd () { # ping the default gateway
@@ -63,13 +141,40 @@ tryping () {
 }
 
 # SSN
-alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc knecht.stusta.de 60601'
-alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc knecht.stusta.de 60601'
-alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc knecht.stusta.de 60601'
-alias factorio-knecht='echo "https://daten.stusta.de/files/013253/music/Factorio_CompleteSoundtrack.webm" | nc knecht.stusta.de 60601'
-alias server-knecht='echo "https://daten.stusta.de/files/013253/PURE_RELAXATION-SERVER_SOUNDSbyHetzner.mp4" | nc knecht.stusta.de 60601'
+VIDEOSCREEN="knecht.stusta.de"
+alias age-knecht='echo "https://daten.stusta.de/files/008300/js.webm" | nc $VIDEOSCREEN 60601'
+alias hymne-knecht='echo "https://dokumente.stustanet.de/hymne.mp3" | nc $VIDEOSCREEN 60601'
+alias xonotic-knecht='echo "https://daten.stusta.de/files/013253/music/xonotic/xonotic_cat.ogg" | nc $VIDEOSCREEN 60601'
+alias factorio-knecht='echo "https://daten.stusta.de/files/013253/music/Factorio_CompleteSoundtrack.webm" | nc $VIDEOSCREEN 60601'
+alias server-knecht='echo "https://daten.stusta.de/files/013253/PURE_RELAXATION-SERVER_SOUNDSbyHetzner.mp4" | nc $VIDEOSCREEN 60601'
+cat-knecht() {
+    url="https://daten.stusta.de/files/a_cat_videos_dgq/"
+    touch /tmp/cat_videos_played
+    tail -n500 /tmp/cat_videos_played > /tmp/cat_videos_short
+    while true; do
+        video=$url$(curl "$url"  2>/dev/null | xmllint --html --xpath "//a[@title]/@href" -  2>/dev/null | awk '{ split($0,a,"\""); printf "%s\n", a[2] }' | shuf -n1)
+        if not grep -q "$video" "/tmp/cat_videos_short"; then
+            break;
+        fi
+    done
+    echo "$video" | nc $VIDEOSCREEN 60601
+    echo "$video" >> /tmp/cat_videos_played
+    echo "$video"
+}
+catomat3000() {
+    while true; do
+        cat-knecht;
+        video=$(tail -n1 /tmp/cat_videos_played)
+        wait=$(ffprobe -show_streams -print_format json "$video" 2>/dev/null | jq -r '.streams[0].duration');
+        echo Playing for $wait seconds
+        sleep $wait;
+    done
+}
 say () {
     curl --data-urlencode "phrase=$*" https://bot.stusta.de/speak
+}
+laut () {
+    curl -H "User-Agent: laut_command" "https://bot.stusta.de/set/$1"
 }
 
 
@@ -78,7 +183,3 @@ alias scan='utsushi scan --no-interface --image-format=PDF --resolution=200 --sc
 alias scan_duplex='scan --duplex --doc-source=ADF'
 alias scan_simplex='scan --doc-source=ADF'
 
-alias pypy='pypy3'
-alias sft-ran-vpn='pushd /home/leo/.config/vpn/sft.ran/; sudo openvpn --daemon --config sftnet.ovpn; popd'
-
-alias gzip='gzip --keep'
