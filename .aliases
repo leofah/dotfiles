@@ -111,8 +111,13 @@ alias lZ='ll -Z'                    # selinux
 alias lrandom="ls | sort -R | head -n 1"
 
 # quality of life
-pingd () { # ping the default gateway
-  ping $(ip route | awk '/^default via/ { print $3 ; exit }')
+# ping the default gateway
+pingd () {
+	if [[ $# -eq 1 && $1 == "-6" ]]; then
+		ping -6 "$(ip -6 -j route list match ::/0 | jq '.[0].gateway' -r)"
+	else
+		ping "$(ip -j route list match 0.0.0.0/0 | jq '.[0].gateway' -r)"
+	fi
 }
 logdate () { # prepend the current date before each line
     while IFS= read -r line; do
