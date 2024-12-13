@@ -136,6 +136,7 @@ alias watch='watch -c'
 alias sudo='sudo '
 
 # emacs
+alias doom=~/.config/emacs/bin/doom
 alias emacsnw='emacs -nw'
 alias emacsopen="emacsclient -n"      # reuse frame
 alias eo=emacsopen
