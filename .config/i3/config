@@ -256,8 +256,11 @@ bindsym $mod+XF86MonBrightnessDown exec --no-startup-id light -S 1 # lowest brig
 # toggle workspace to other output (screen)
 bindsym $mod+Shift+p move workspace to output right
 
-set $mode_monitor Monitor Setting | [p]rimary | [s]econdary | [d]uplicate | [m]irror | [e]xtend | [w]allpaper
+set $mode_monitor Monitor Setting | [p]rimary | [s]econdary | [d]uplicate | [m]irror | [e]xtend | [i]nternal | [w]allpaper
 mode  "$mode_monitor" {
+    # internal primary
+    bindsym i exec --no-startup-id mons --primary eDP -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
+    # default mons commands (only works for two displays)
     bindsym p exec --no-startup-id mons -o, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
     bindsym s exec --no-startup-id mons -s, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
     bindsym d exec --no-startup-id mons -d, mode "default", exec --no-startup-id sleep 1 && $script_path/setWallpaper.sh
