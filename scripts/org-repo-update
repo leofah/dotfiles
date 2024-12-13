@@ -1,0 +1,25 @@
+#!/usr/bin/env -S python3 -u
+
+"""
+automatic updates for the org repo
+mainly does git commits.
+
+only performs commits if a .gitcommit file is present
+only pushes when a .gitpush file is present
+"""
+
+import os
+import socket
+import subprocess
+
+os.chdir(os.path.expanduser("~/org/"))
+
+if os.path.exists(".gitcommit"):
+    hostname = socket.gethostname()
+    subprocess.check_call(["git", "add", "--all"])
+    changes = subprocess.check_output(["git", "status", "--porcelain"])
+    if changes:
+        subprocess.check_call(["git", "commit", "-m", f"commit on {hostname}"])
+
+if os.path.exists(".gitpush"):
+    subprocess.check_call(["git", "push"])
