@@ -122,6 +122,12 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+for_window [class="firefox" window_role="alert"] floating enable
+no_focus [class="firefox" window_role="alert"]
+for_window [class="thunderbird" window_role="alert"] floating enable
+for_window [class="thunderbird" window_role="about"] floating enable
+no_focus [class="thunderbird" window_role="alert"]
+
 # windows on specific workspaces
 assign [class="firefox"] $workspace2
 assign [class="thunderbird"] $workspace3
