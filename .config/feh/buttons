@@ -1,0 +1,41 @@
+# Feh (mouse) button Config
+
+# the entries are  of  the  form "action [binding]".
+#
+# Each  binding  is a button number.  It may optionally start with modifiers for things like
+# Control, in which case binding looks like mod-button (for example  C-1  for  Ctrl  +  Left
+# button)
+
+# Default config:
+# 0 ⟨cursor movement while not panning, zooming, or similar⟩
+#         Does not have a default binding.  By binding it to quit, you can turn feh  into  a
+#         simple screensaver.
+#
+# 1 ⟨left mouse button⟩ [pan]
+#         pan the current image
+#
+# 2 ⟨middle mouse button⟩ [zoom]
+#         Zoom the current image
+#
+# 3 ⟨right mouse button⟩ [toggle_menu]
+#         Toggle menu
+#
+# 4 ⟨mousewheel down⟩ [prev_img]
+#         Show previous image
+#
+# 5 ⟨mousewheel up⟩ [next_img]
+#         Show next image
+#
+# Ctrl+1 [blur]
+#         Blur current image
+#
+# Ctrl+2 [rotate]
+#         Rotate current image
+
+
+next_img 3
+toggle_menu C-3
+
+# zoom with mouse wheel
+zoom_in  4
+zoom_out 5

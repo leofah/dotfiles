@@ -1,4 +1,22 @@
-#vim like forward
+# Feh Key Binding Config
+#
+#
+#
+# key definition: <action name> <key1> [<key2> [<key3>]]
+# -> A maximum of 3 keys are allowed for each action
+# default key binding are overwritten
+#
+# Each <key> is an X11 keysym (as output by xev) with optional modifier.
+# For instance, C-x would be Ctrl+X, or 4-space Mod4+Space
 
-next_img l
-prev_img h
+
+# vim like image navigation
+next_img l space Right
+prev_img h BackSpace Left
+
+# named rotate key
+orient_1 r greater
+orient_3 R less
+# remove default actions for key `r` which is now used for rotate
+reload_image C-r
+render C-R
