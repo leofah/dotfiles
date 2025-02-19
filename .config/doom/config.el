@@ -55,6 +55,15 @@
   (delq! #'org-roam-complete-everywhere org-roam-completion-functions)
   (setq org-roam-directory (expand-file-name "~/org/zettel")))
 
+;; pretty formatting
+(use-package! org-modern
+  :after org)
+
+
+
+;; Hooks here for now
+(add-hook 'org-mode-hook #'org-modern-mode)
+(add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
