@@ -42,11 +42,19 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq doom-leader-alt-key-states '(normal visual motion emacs insert))
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
-(setq doom-leader-alt-key-states '(normal visual motion emacs insert))
+(after! org
+  (setq org-hide-emphasis-markers t)
+
+  ;; so pressing tab in insert mode doesn't indent the headline.
+  (remove-hook! 'org-tab-first-hook #'+org-indent-maybe-h)
+  ;; pressing tab should cycle also child items, not just the current heading
+  (remove-hook! 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 ;; org roam note system
 (after! org-roam
